@@ -107,4 +107,7 @@ print(transformed_df[melb_transformed_columns].skew())
 correlation_matrix_transformed = transformed_df[melb_transformed_columns].corr()
 sns.heatmap(correlation_matrix_transformed, annot=True)
 plt.title("Correlation Matrix After Transformations")  # Added title for clarity
-plt.show() 
+plt.show()
+
+# Export transformed data to a new CSV file
+transformed_df.to_csv('transformed_melb_data.csv', index=False)
