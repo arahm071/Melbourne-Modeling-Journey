@@ -1,188 +1,110 @@
-# Importing necessary libraries
+# Importing necessary libraries for data analysis and visualization
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import scipy
 
-
-# Load dataset
+# Load dataset containing Melbourne housing data
 melb_data = pd.read_csv('cleaned_melb_data.csv')
-
 melb_columns = ['Price', 'Distance', 'NewBed', 'Bathroom', 'Car', 'Landsize']
 
-def plot_skew(column_list, rows, cols, fig_x, fix_y):
-    
-    # Create a 3x2 subplot
-    fig, axs = plt.subplots(nrows=rows, ncols=cols, figsize=(fig_x, fix_y))
+def plot_skew(data, column_list, rows, cols, fig_x=15, fig_y=15):
+    """
+    Plots histograms for each specified column in a dataset.
 
-    
+    Args:
+    data: DataFrame to plot data from.
+    column_list: List of column names to plot histograms for.
+    rows: Number of subplot rows.
+    cols: Number of subplot columns.
+    fig_x: Figure width.
+    fig_y: Figure height.
+    """
+    # Create a subplot grid
+    fig, axs = plt.subplots(nrows=rows, ncols=cols, figsize=(fig_x, fig_y))
+    rows_count, cols_count = 0, 0
 
-# Create a 3x2 subplot
-fig, axs = plt.subplots(nrows=2, ncols=3, figsize=(15, 15))
+    # Iterate through the column list and plot histograms
+    for column_name in column_list:
+        sns.histplot(data=data, x=column_name, ax=axs[rows_count, cols_count])
+        axs[rows_count, cols_count].set_title(f'Distribution of {column_name}')
+        cols_count += 1
 
-# Plotting histogram for 'Price'
-sns.histplot(data=melb_data, x='Price', ax=axs[0, 0])
-axs[0, 0].set_title('Distribution of Property Prices')
+        # Move to the next row if the current row is filled
+        if cols_count >= cols:
+            cols_count = 0
+            rows_count += 1
 
-# Plotting histogram for 'Distance'
-sns.histplot(data=melb_data, x='Distance', ax=axs[0, 1])
-axs[0, 1].set_title('Distribution of Distance from CBD')
+    plt.tight_layout()  # Adjust layout to prevent overlap
+    plt.show()  # Display the plot
 
-# Plotting histogram for 'NewBed'
-sns.histplot(data=melb_data, x='NewBed', ax=axs[0, 2])
-axs[0, 2].set_title('Distribution of Number of Bedrooms')
+def plot_outliers(data, column_list, rows, cols, fig_x=15, fig_y=15):
+    """
+    Plots boxplots for each specified column in a dataset to show outliers.
 
-# Plotting histogram for 'Bathroom'
-sns.histplot(data=melb_data, x='Bathroom', ax=axs[1, 0])
-axs[1, 0].set_title('Distribution of Number of Bathrooms')
+    Args:
+    data: DataFrame to plot data from.
+    column_list: List of column names to plot boxplots for.
+    rows: Number of subplot rows.
+    cols: Number of subplot columns.
+    fig_x: Figure width.
+    fig_y: Figure height.
+    """
+    # Create a subplot grid
+    fig, axs = plt.subplots(nrows=rows, ncols=cols, figsize=(fig_x, fig_y))
+    rows_count, cols_count = 0, 0
 
-# Plotting histogram for 'Car'
-sns.histplot(data=melb_data, x='Car', ax=axs[1, 1])
-axs[1, 1].set_title('Distribution of Car Parking Spaces')
+    # Iterate through the column list and plot boxplots
+    for column_name in column_list:
+        sns.boxplot(data=data, x=column_name, ax=axs[rows_count, cols_count])
+        axs[rows_count, cols_count].set_title(f'Boxplot of {column_name}')
+        cols_count += 1
 
-# Plotting histogram for 'Landsize'
-sns.histplot(data=melb_data, x='Landsize', ax=axs[1, 2])
-axs[1, 2].set_title('Distribution of Landsize')
+        # Move to the next row if the current row is filled
+        if cols_count >= cols:
+            cols_count = 0
+            rows_count += 1
 
-# Adjust layout so titles don't overlap with plots
-plt.tight_layout()
+    plt.tight_layout()  # Adjust layout to prevent overlap
+    plt.show()  # Display the plot
 
-# Show plot
-plt.show()
+# Plot histograms and boxplots for the original data
+plot_skew(data=melb_data, column_list=melb_columns, rows=2, cols=3)
+plot_outliers(data=melb_data, column_list=melb_columns, rows=2, cols=3)
 
-print(melb_data[melb_columns].skew())
-
-# Create a 3x2 subplot for boxplots
-fig, axs = plt.subplots(nrows=2, ncols=3, figsize=(15, 10))
-
-# Plotting boxplot for 'Price'
-sns.boxplot(data=melb_data, x='Price', ax=axs[0, 0])
-axs[0, 0].set_title('Boxplot of Property Prices')
-
-# Plotting boxplot for 'Distance'
-sns.boxplot(data=melb_data, x='Distance', ax=axs[0, 1])
-axs[0, 1].set_title('Boxplot of Distance from CBD')
-
-# Plotting boxplot for 'NewBed'
-sns.boxplot(data=melb_data, x='NewBed', ax=axs[0, 2])
-axs[0, 2].set_title('Boxplot of Number of Bedrooms')
-
-# Plotting boxplot for 'Bathroom'
-sns.boxplot(data=melb_data, x='Bathroom', ax=axs[1, 0])
-axs[1, 0].set_title('Boxplot of Number of Bathrooms')
-
-# Plotting boxplot for 'Car'
-sns.boxplot(data=melb_data, x='Car', ax=axs[1, 1])
-axs[1, 1].set_title('Boxplot of Car Parking Spaces')
-
-# Plotting boxplot for 'Landsize'
-sns.boxplot(data=melb_data, x='Landsize', ax=axs[1, 2])
-axs[1, 2].set_title('Boxplot of Landsize')
-
-# Adjust layout so titles don't overlap with plots
-plt.tight_layout()
-
-# Show plot
-plt.show()
-
-
-# Computing correlation matrix for numerical variables
+# Compute and display correlation matrix for numerical variables
 correlation_matrix = melb_data[melb_columns].corr()
 sns.heatmap(correlation_matrix, annot=True)
-plt.title("Correlation Matrix")  # Added title for clarity
-plt.show() 
+plt.title("Correlation Matrix")  # Add title for clarity
+plt.show()
 
-# Calculate the first quartile (Q1) and third quartile (Q3) for the current 'Landsize'
+# Calculate and filter outliers for 'Landsize' column
 q1 = melb_data['Landsize'].quantile(0.25)
 q3 = melb_data['Landsize'].quantile(0.75)
-
-# Calculate the Interquartile Range (IQR) for the current 'Landsize'
 IQR = q3 - q1
-
-# Calculate the upper and lower bounds for outliers for the current 'Landsize'
 upper = q3 + (1.5 * IQR)
 lower = q1 - (1.5 * IQR)
+transformed_df = melb_data[(melb_data['Landsize'] >= lower) & (melb_data['Landsize'] <= upper)].copy()
 
-# Filter outliers based on the upper and lower bounds for the current 'Landsize'
-transformed_df = melb_data[(melb_data['Landsize'] >= lower) & (melb_data['Landsize'] <= upper)]
-transformed_df = transformed_df.copy()  # Create a copy of the filtered DataFrame
-
-# Log transformation for 'Price' and 'Bathroom' columns
+# Apply log transformation to 'Price' column
 transformed_df['Price'] = np.log(transformed_df['Price'])
 
+# Rename columns to reflect transformations
 transformed_df.rename(columns={"Price": "Price_log", "Landsize": "Landsize_no_outliers"}, inplace=True)
 
-# Create a 3x2 subplot for histograms
-fig, axs = plt.subplots(nrows=2, ncols=3, figsize=(15, 15))
+# Columns for the transformed data
+melb_transformed_columns = ['Price_log', 'Distance', 'NewBed', 'Bathroom', 'Car', 'Landsize_no_outliers']
 
-# Plotting histogram for 'Price_log'
-sns.histplot(data=transformed_df, x='Price_log', ax=axs[0, 0])
-axs[0, 0].set_title('Distribution of Log Transformed Property Prices')
-
-# Plotting histogram for 'Distance' using transformed dataframe
-sns.histplot(data=transformed_df, x='Distance', ax=axs[0, 1])
-axs[0, 1].set_title('Distribution of Distance from CBD')
-
-# Plotting histogram for 'NewBed' using transformed dataframe
-sns.histplot(data=transformed_df, x='NewBed', ax=axs[0, 2])
-axs[0, 2].set_title('Distribution of Number of Bedrooms')
-
-# Plotting histogram for 'Bathroom' using transformed dataframe
-sns.histplot(data=transformed_df, x='Bathroom', ax=axs[1, 0])
-axs[1, 0].set_title('Distribution of Number of Bathrooms')
-
-# Plotting histogram for 'Car' using transformed dataframe
-sns.histplot(data=transformed_df, x='Car', ax=axs[1, 1])
-axs[1, 1].set_title('Distribution of Car Parking Spaces')
-
-# Plotting histogram for 'Landsize_no_outliers'
-sns.histplot(data=transformed_df, x='Landsize_no_outliers', ax=axs[1, 2])
-axs[1, 2].set_title('Distribution of Landsize with No Outliers')
-
-# Adjust layout so titles don't overlap with plots
-plt.tight_layout()
-
-# Show plot
-plt.show()
+# Plot histograms and boxplots for the transformed data
+plot_skew(data=transformed_df, column_list=melb_transformed_columns, rows=2, cols=3)
+plot_outliers(data=transformed_df, column_list=melb_transformed_columns, rows=2, cols=3)
 
 # Print skewness for the selected variables from the transformed dataframe
-print(transformed_df[['Price_log', 'Distance', 'NewBed', 'Bathroom', 'Car', 'Landsize_no_outliers']].skew())
+print(transformed_df[melb_transformed_columns].skew())
 
-# Create a 3x2 subplot for boxplots
-fig, axs = plt.subplots(nrows=2, ncols=3, figsize=(15, 10))
-
-# Plotting boxplot for 'Price_log'
-sns.boxplot(data=transformed_df, x='Price_log', ax=axs[0, 0])
-axs[0, 0].set_title('Boxplot of Log Transformed Property Prices')
-
-# Plotting boxplot for 'Distance' using transformed dataframe
-sns.boxplot(data=transformed_df, x='Distance', ax=axs[0, 1])
-axs[0, 1].set_title('Boxplot of Distance from CBD')
-
-# Plotting boxplot for 'NewBed' using transformed dataframe
-sns.boxplot(data=transformed_df, x='NewBed', ax=axs[0, 2])
-axs[0, 2].set_title('Boxplot of Number of Bedrooms')
-
-# Plotting boxplot for 'Bathroom' using transformed dataframe
-sns.boxplot(data=transformed_df, x='Bathroom', ax=axs[1, 0])
-axs[1, 0].set_title('Boxplot of Number of Bathrooms')
-
-# Plotting boxplot for 'Car' using transformed dataframe
-sns.boxplot(data=transformed_df, x='Car', ax=axs[1, 1])
-axs[1, 1].set_title('Boxplot of Car Parking Spaces')
-
-# Plotting boxplot for 'Landsize_no_outliers'
-sns.boxplot(data=transformed_df, x='Landsize_no_outliers', ax=axs[1, 2])
-axs[1, 2].set_title('Boxplot of Landsize with No Outliers')
-
-# Adjust layout so titles don't overlap with plots
-plt.tight_layout()
-
-# Show plot
-plt.show()
-
-correlation_matrix = transformed_df[['Price_log','Distance','NewBed','Bathroom','Car','Landsize_no_outliers']].corr()
-sns.heatmap(correlation_matrix, annot=True)
+# Compute and display correlation matrix for the transformed data
+correlation_matrix_transformed = transformed_df[melb_transformed_columns].corr()
+sns.heatmap(correlation_matrix_transformed, annot=True)
 plt.title("Correlation Matrix After Transformations")  # Added title for clarity
-plt.show()
+plt.show() 
