@@ -9,6 +9,15 @@ import scipy
 # Load dataset
 melb_data = pd.read_csv('cleaned_melb_data.csv')
 
+melb_columns = ['Price', 'Distance', 'NewBed', 'Bathroom', 'Car', 'Landsize']
+
+def plot_skew(column_list, rows, cols, fig_x, fix_y):
+    
+    # Create a 3x2 subplot
+    fig, axs = plt.subplots(nrows=rows, ncols=cols, figsize=(fig_x, fix_y))
+
+    
+
 # Create a 3x2 subplot
 fig, axs = plt.subplots(nrows=2, ncols=3, figsize=(15, 15))
 
@@ -42,7 +51,7 @@ plt.tight_layout()
 # Show plot
 plt.show()
 
-print(melb_data[['Price', 'Distance', 'NewBed', 'Bathroom', 'Car', 'Landsize']].skew())
+print(melb_data[melb_columns].skew())
 
 # Create a 3x2 subplot for boxplots
 fig, axs = plt.subplots(nrows=2, ncols=3, figsize=(15, 10))
@@ -79,7 +88,7 @@ plt.show()
 
 
 # Computing correlation matrix for numerical variables
-correlation_matrix = melb_data[['Price','Distance','NewBed','Bathroom','Car','Landsize']].corr()
+correlation_matrix = melb_data[melb_columns].corr()
 sns.heatmap(correlation_matrix, annot=True)
 plt.title("Correlation Matrix")  # Added title for clarity
 plt.show() 
