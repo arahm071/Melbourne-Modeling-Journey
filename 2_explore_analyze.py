@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import scipy
 
-# Load dataset containing Melbourne housing data
+# Load dataset containing cleaned Melbourne housing data
 melb_data = pd.read_csv('cleaned_melb_data.csv')
 melb_columns = ['Price', 'Distance', 'NewBed', 'Bathroom', 'Car', 'Landsize']
 
