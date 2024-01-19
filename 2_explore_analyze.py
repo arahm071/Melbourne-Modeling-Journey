@@ -1,25 +1,30 @@
-# Importing necessary libraries for data analysis and visualization
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-import scipy
+# Standard library imports
+# (No standard library imports in this code)
+
+# Third-party imports
+import pandas as pd           # Data manipulation and analysis library
+import numpy as np            # Scientific computing library
+import matplotlib.pyplot as plt  # Plotting library for creating static and interactive visualizations
+import seaborn as sns         # Data visualization library based on matplotlib
+import scipy                  # Library for scientific and technical computing
 
 # Load dataset containing cleaned Melbourne housing data
 melb_data = pd.read_csv('1_cleaned_melb_data.csv')
+
+# Define columns for analysis
 melb_columns = ['Price', 'Distance', 'NewBed', 'Bathroom', 'Car', 'Landsize']
 
 def plot_skew(data, column_list, rows, cols, fig_x=15, fig_y=15):
     """
-    Plots histograms for each specified column in a dataset.
+    Plots histograms for each specified column in a dataset to analyze skewness.
 
-    Args:
-    data: DataFrame to plot data from.
-    column_list: List of column names to plot histograms for.
-    rows: Number of subplot rows.
-    cols: Number of subplot columns.
-    fig_x: Figure width.
-    fig_y: Figure height.
+    Parameters:
+    data (DataFrame): The dataset to plot.
+    column_list (list): List of column names to plot histograms for.
+    rows (int): Number of rows in the subplot grid.
+    cols (int): Number of columns in the subplot grid.
+    fig_x (int): Width of the figure.
+    fig_y (int): Height of the figure.
     """
     # Create a subplot grid
     fig, axs = plt.subplots(nrows=rows, ncols=cols, figsize=(fig_x, fig_y))
@@ -41,15 +46,15 @@ def plot_skew(data, column_list, rows, cols, fig_x=15, fig_y=15):
 
 def plot_outliers(data, column_list, rows, cols, fig_x=15, fig_y=15):
     """
-    Plots boxplots for each specified column in a dataset to show outliers.
+    Plots boxplots for each specified column in a dataset to identify outliers.
 
-    Args:
-    data: DataFrame to plot data from.
-    column_list: List of column names to plot boxplots for.
-    rows: Number of subplot rows.
-    cols: Number of subplot columns.
-    fig_x: Figure width.
-    fig_y: Figure height.
+    Parameters:
+    data (DataFrame): The dataset to plot.
+    column_list (list): List of column names to plot boxplots for.
+    rows (int): Number of rows in the subplot grid.
+    cols (int): Number of columns in the subplot grid.
+    fig_x (int): Width of the figure.
+    fig_y (int): Height of the figure.
     """
     # Create a subplot grid
     fig, axs = plt.subplots(nrows=rows, ncols=cols, figsize=(fig_x, fig_y))
@@ -69,17 +74,17 @@ def plot_outliers(data, column_list, rows, cols, fig_x=15, fig_y=15):
     plt.tight_layout()  # Adjust layout to prevent overlap
     plt.show()  # Display the plot
 
-# Plot histograms and boxplots for the original data
+# Perform initial plotting of data
 plot_skew(data=melb_data, column_list=melb_columns, rows=2, cols=3)
 plot_outliers(data=melb_data, column_list=melb_columns, rows=2, cols=3)
 
-# Compute and display correlation matrix for numerical variables
+# Compute and display correlation matrix for the numerical variables in the dataset
 correlation_matrix = melb_data[melb_columns].corr()
 sns.heatmap(correlation_matrix, annot=True)
-plt.title("Correlation Matrix")  # Add title for clarity
+plt.title("Correlation Matrix")
 plt.show()
 
-# Calculate and filter outliers for 'Landsize' column
+# Identify and handle outliers for 'Landsize' column
 q1 = melb_data['Landsize'].quantile(0.25)
 q3 = melb_data['Landsize'].quantile(0.75)
 IQR = q3 - q1
@@ -93,21 +98,21 @@ transformed_df['Price'] = np.log(transformed_df['Price'])
 # Rename columns to reflect transformations
 transformed_df.rename(columns={"Price": "Price_log", "Landsize": "Landsize_no_outliers"}, inplace=True)
 
-# Columns for the transformed data
+# Redefine columns for the transformed data
 melb_transformed_columns = ['Price_log', 'Distance', 'NewBed', 'Bathroom', 'Car', 'Landsize_no_outliers']
 
 # Plot histograms and boxplots for the transformed data
 plot_skew(data=transformed_df, column_list=melb_transformed_columns, rows=2, cols=3)
 plot_outliers(data=transformed_df, column_list=melb_transformed_columns, rows=2, cols=3)
 
-# Print skewness for the selected variables from the transformed dataframe
+# Print skewness for selected variables from the transformed dataframe
 print(transformed_df[melb_transformed_columns].skew())
 
 # Compute and display correlation matrix for the transformed data
 correlation_matrix_transformed = transformed_df[melb_transformed_columns].corr()
 sns.heatmap(correlation_matrix_transformed, annot=True)
-plt.title("Correlation Matrix After Transformations")  # Added title for clarity
+plt.title("Correlation Matrix After Transformations")
 plt.show()
 
 # Export transformed data to a new CSV file
-transformed_df.to_csv('transformed_melb_data.csv', index=False)
+transformed_df.to_csv('2_transformed_melb_data.csv', index=False)
