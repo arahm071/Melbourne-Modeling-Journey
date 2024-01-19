@@ -6,7 +6,7 @@ import seaborn as sns
 import scipy
 
 # Load dataset containing cleaned Melbourne housing data
-melb_data = pd.read_csv('cleaned_melb_data.csv')
+melb_data = pd.read_csv('1_cleaned_melb_data.csv')
 melb_columns = ['Price', 'Distance', 'NewBed', 'Bathroom', 'Car', 'Landsize']
 
 def plot_skew(data, column_list, rows, cols, fig_x=15, fig_y=15):

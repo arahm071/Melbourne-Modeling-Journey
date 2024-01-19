@@ -9,7 +9,7 @@ from datetime import datetime
 dateparse = lambda x: datetime.strptime(x, '%d/%m/%Y')
 
 # Load dataset with custom date parsing
-melb_data = pd.read_csv('melb_data.csv', parse_dates=['Date'], date_parser=dateparse)
+melb_data = pd.read_csv('0_melb_data.csv', parse_dates=['Date'], date_parser=dateparse)
 melb_data['Date'] = melb_data['Date'].dt.date  # Convert datetime to date
 
 # Remove duplicate entries
