@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import statsmodels.api as sm
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
 # Load the transformed Melbourne housing dataset
 melb_data = pd.read_csv('2_transformed_melb_data.csv')
@@ -34,3 +35,18 @@ y = melb_data['Price_log']
 # Fitting the OLS regression model and printing the summary
 model = sm.OLS(y, X).fit()
 print(model.summary())
+
+#Detecting Multicollinearity with VIF (for high Cond. No.)
+
+corr_matrix = X.corr()
+
+sns.heatmap(corr_matrix, annot=True)
+#plt.show()
+
+vif_data = pd.DataFrame()
+
+vif_data['feature'] = X.columns
+
+vif_data["VIF"] = [variance_inflation_factor(X.values, i) for i in range(len(X.columns))] 
+
+print(vif_data) #vif_data shows all vifs are below common threshold so multicollinearity is not a significant concern for the independent variables
