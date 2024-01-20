@@ -8,15 +8,8 @@ import matplotlib.pyplot as plt  # Plotting library for creating static and inte
 import seaborn as sns         # Data visualization library based on matplotlib
 
 # Load the transformed Melbourne housing dataset
-melb_data = pd.read_csv('1_clean_melb_data.csv')
+melb_data = pd.read_csv('1_cleaned_melb_data.csv', parse_dates=['Date'])
 
-# Identify and handle outliers for 'Landsize' column
-q1 = melb_data['Landsize'].quantile(0.25)
-q3 = melb_data['Landsize'].quantile(0.75)
-IQR = q3 - q1
-upper = q3 + (1.5 * IQR)
-lower = q1 - (1.5 * IQR)
-transformed_df = melb_data[(melb_data['Landsize'] >= lower) & (melb_data['Landsize'] <= upper)].copy()
-
-# Rename columns to reflect transformations
-transformed_df.rename(columns={"Landsize": "Landsize_no_outliers"}, inplace=True)
+#Setup data for timeseries use
+melb_data.sort_values(by='Date', inplace=True)
+date_avgprice = melb_data.groupby('Date')['Price'].mean().reset_index().set_index('Date')
