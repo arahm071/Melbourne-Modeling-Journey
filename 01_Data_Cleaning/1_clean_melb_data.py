@@ -1,19 +1,26 @@
 # Standard library imports
+import os              # Provides a way of using operating system dependent functionality
 from datetime import datetime  # For handling date and time data
 
 # Third-party imports
-import pandas as pd            # Popular data manipulation and analysis library for Python
-import numpy as np             # Fundamental package for scientific computing in Python
+import pandas as pd             # Popular data manipulation and analysis library for Python
+import numpy as np              # Fundamental package for scientific computing in Python
 import matplotlib.pyplot as plt # Plotting library for creating static, animated, and interactive visualizations
-import seaborn as sns          # Data visualization library based on matplotlib
+import seaborn as sns           # Data visualization library based on matplotlib
 
 # Define a lambda function for date parsing in the dataset
 # This is used to convert date strings into datetime objects
 dateparse = lambda x: datetime.strptime(x, '%d/%m/%Y')
 
+# Get the absolute path to the directory of the current script
+script_dir = os.path.abspath(os.path.dirname(__file__))
+
+# Build the absolute path to the data file
+data_path = os.path.join(script_dir, '..', '00_Raw_Data', '0_melb_data.csv')
+
 # Load the dataset with custom date parsing for the 'Date' column
 # and immediately convert datetime objects to date format
-melb_data = pd.read_csv('0_melb_data.csv', parse_dates=['Date'], date_parser=dateparse)
+melb_data = pd.read_csv(data_path, parse_dates=['Date'], date_parser=dateparse)
 melb_data['Date'] = melb_data['Date'].dt.date
 
 # Remove duplicate entries from the dataset to ensure data integrity
@@ -66,8 +73,11 @@ melb_data = melb_data[['Address', 'Suburb', 'Regionname', 'Type', 'Price', 'Meth
                        'Date', 'Distance', 'NewBed', 'Bathroom', 'Car', 
                        'Landsize', 'Propertycount']]
 
+# Construct the full file path
+output_file_path = os.path.join(script_dir, '1_cleaned_melb_data.csv')
+
 # Export the cleaned and processed data to a new CSV file
-melb_data.to_csv('1_cleaned_melb_data.csv', index=False)
+melb_data.to_csv(output_file_path, index=False)
 
 # Uncomment the following lines to explore the dataset
 # print(melb_data.describe())

@@ -1,5 +1,5 @@
 # Standard library imports
-# (No standard library imports in this code)
+import os              # Provides a way of using operating system dependent functionality
 
 # Third-party imports
 import pandas as pd           # Data manipulation and analysis library
@@ -8,8 +8,14 @@ import matplotlib.pyplot as plt  # Plotting library for creating static and inte
 import matplotlib.dates as mdates  # Handling date formats in matplotlib
 import seaborn as sns         # Data visualization library based on matplotlib
 
-# Load the transformed Melbourne housing dataset with dates parsed
-melb_data = pd.read_csv('1_cleaned_melb_data.csv', parse_dates=['Date'])
+# Get the absolute path to the directory of the current script
+script_dir = os.path.abspath(os.path.dirname(__file__))
+
+# Build the absolute path to the data file
+data_path = os.path.join(script_dir, '..', '01_Data_Cleaning', '1_cleaned_melb_data.csv')
+
+# Load the cleaned Melbourne housing dataset with dates parsed
+melb_data = pd.read_csv(data_path, parse_dates=['Date'])
 
 # Setup data for time series analysis
 # Sorting by date and aggregating average price and count of houses

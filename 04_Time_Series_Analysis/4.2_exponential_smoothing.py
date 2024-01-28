@@ -1,5 +1,5 @@
 # Standard library imports
-# (No standard library imports in this code)
+import os              # Provides a way of using operating system dependent functionality
 
 # Third-party imports
 import pandas as pd           # Data manipulation and analysis library
@@ -11,8 +11,14 @@ from statsmodels.tsa.holtwinters import ExponentialSmoothing  # Exponential smoo
 from sklearn.model_selection import TimeSeriesSplit  # Time series cross-validator
 from sklearn.metrics import mean_squared_error  # Metric for error calculation
 
+# Get the absolute path to the directory of the current script
+script_dir = os.path.abspath(os.path.dirname(__file__))
+
+# Build the absolute path to the data file
+data_path = os.path.join(script_dir, '..', '01_Data_Cleaning', '1_cleaned_melb_data.csv')
+
 # Load the transformed Melbourne housing dataset with dates parsed
-melb_data = pd.read_csv('1_cleaned_melb_data.csv', parse_dates=['Date'])
+melb_data = pd.read_csv(data_path, parse_dates=['Date'])
 
 # Setup data for time series analysis
 # Sorting by date and aggregating average price

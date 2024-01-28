@@ -1,5 +1,5 @@
 # Standard library imports
-# (No standard library imports in this code)
+import os              # Provides a way of using operating system dependent functionality
 
 # Third-party imports
 import pandas as pd           # Data manipulation and analysis library
@@ -10,8 +10,14 @@ import statsmodels.api as sm  # Statistical models including OLS regression
 from statsmodels.stats.outliers_influence import variance_inflation_factor  # VIF calculation
 from sklearn.preprocessing import StandardScaler  # StandardScaler for normalization
 
+# Get the absolute path to the directory of the current script
+script_dir = os.path.abspath(os.path.dirname(__file__))
+
+# Build the absolute path to the data file
+data_path = os.path.join(script_dir, '..', '02_Data_Exploration', '2_transformed_melb_data.csv')
+
 # Load the transformed Melbourne housing dataset
-melb_data = pd.read_csv('2_transformed_melb_data.csv')
+melb_data = pd.read_csv(data_path)
 
 # Initialize the StandardScaler
 scaler = StandardScaler()
