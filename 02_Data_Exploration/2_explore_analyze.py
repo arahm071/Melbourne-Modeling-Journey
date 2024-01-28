@@ -1,15 +1,21 @@
 # Standard library imports
-# (No standard library imports in this code)
+import os              # Provides a way of using operating system dependent functionality
 
 # Third-party imports
-import pandas as pd           # Data manipulation and analysis library
-import numpy as np            # Scientific computing library
+import pandas as pd              # Data manipulation and analysis library
+import numpy as np               # Scientific computing library
 import matplotlib.pyplot as plt  # Plotting library for creating static and interactive visualizations
-import seaborn as sns         # Data visualization library based on matplotlib
-import scipy                  # Library for scientific and technical computing
+import seaborn as sns            # Data visualization library based on matplotlib
+import scipy                     # Library for scientific and technical computing
+
+# Get the absolute path to the directory of the current script
+script_dir = os.path.abspath(os.path.dirname(__file__))
+
+# Build the absolute path to the data file
+data_path = os.path.join(script_dir, '..', '01_Data_Cleaning', '1_cleaned_melb_data.csv')
 
 # Load dataset containing cleaned Melbourne housing data
-melb_data = pd.read_csv('1_cleaned_melb_data.csv')
+melb_data = pd.read_csv(data_path)
 
 # Define columns for analysis
 melb_columns = ['Price', 'Distance', 'NewBed', 'Bathroom', 'Car', 'Landsize']
@@ -114,5 +120,8 @@ sns.heatmap(correlation_matrix_transformed, annot=True)
 plt.title("Correlation Matrix After Transformations")
 plt.show()
 
+# Construct the full file path
+output_file_path = os.path.join(script_dir, '2_transformed_melb_data.csv')
+
 # Export transformed data to a new CSV file
-transformed_df.to_csv('2_transformed_melb_data.csv', index=False)
+transformed_df.to_csv(output_file_path, index=False)
