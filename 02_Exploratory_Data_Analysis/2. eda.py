@@ -84,6 +84,10 @@ def plot_outliers(data, column_list, rows, cols, fig_x=15, fig_y=15):
 plot_skew(data=melb_data, column_list=melb_columns, rows=2, cols=3)
 plot_outliers(data=melb_data, column_list=melb_columns, rows=2, cols=3)
 
+#Pairplot
+sns.pairplot(data=melb_data[melb_columns])
+plt.show()
+
 # Compute and display correlation matrix for the numerical variables in the dataset
 correlation_matrix = melb_data[melb_columns].corr()
 sns.heatmap(correlation_matrix, annot=True)
@@ -118,6 +122,10 @@ print(transformed_df[melb_transformed_columns].skew())
 correlation_matrix_transformed = transformed_df[melb_transformed_columns].corr()
 sns.heatmap(correlation_matrix_transformed, annot=True)
 plt.title("Correlation Matrix After Transformations")
+plt.show()
+
+#Pairplot (Which also contain Linearity Check (Don't use any catergorical variables))
+sns.pairplot(data=transformed_df[melb_transformed_columns])
 plt.show()
 
 # Construct the full file path

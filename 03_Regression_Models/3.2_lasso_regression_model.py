@@ -9,7 +9,7 @@ import seaborn as sns         # Data visualization library based on matplotlib
 import statsmodels.api as sm  # Statistical models including OLS regression
 from sklearn.preprocessing import StandardScaler  # StandardScaler for normalization
 from sklearn.model_selection import train_test_split, RepeatedKFold, cross_val_score
-from sklearn.linear_model import Lasso, LassoCV
+from sklearn.linear_model import Lasso, LassoCV, lasso_path
 from sklearn.metrics import mean_squared_error
 import scipy.stats as stats
 from statsmodels.stats.stattools import durbin_watson
@@ -18,7 +18,7 @@ from statsmodels.stats.stattools import durbin_watson
 script_dir = os.path.abspath(os.path.dirname(__file__))
 
 # Build the absolute path to the data file
-data_path = os.path.join(script_dir, '..', '02_Data_Exploration', '2_transformed_melb_data.csv')
+data_path = os.path.join(script_dir, '..', '02_Exploratory_Data_Analysis', '2_transformed_melb_data.csv')
 
 # Load the transformed Melbourne housing dataset
 melb_data = pd.read_csv(data_path)
@@ -117,6 +117,22 @@ print("Condition Number:", condition_number)
 # Checking for Autocorrelation (Durbin-Watson Test)
 dw = durbin_watson(residuals)
 print("Durbin-Watson statistic:", dw)
+
+# Compute the Lasso path with lasso_path function
+alphas, coefs, _ = lasso_path(X, y)
+
+# Plotting the Lasso path
+plt.figure()
+for coef, feature in zip(coefs, X.columns):
+    plt.plot(alphas, coef, label=feature)
+
+plt.xscale('log')
+plt.xlabel('Alpha')
+plt.ylabel('Coefficient')
+plt.title('Lasso Path')
+plt.legend()
+plt.axis('tight')
+plt.show()
 
 '''
 # External Validation

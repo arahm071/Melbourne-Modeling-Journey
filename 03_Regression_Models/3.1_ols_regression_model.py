@@ -9,12 +9,13 @@ import seaborn as sns         # Data visualization library based on matplotlib
 import statsmodels.api as sm  # Statistical models including OLS regression
 from statsmodels.stats.outliers_influence import variance_inflation_factor  # VIF calculation
 from sklearn.preprocessing import StandardScaler  # StandardScaler for normalization
+from statsmodels.stats.outliers_influence import OLSInfluence
 
 # Get the absolute path to the directory of the current script
 script_dir = os.path.abspath(os.path.dirname(__file__))
 
 # Build the absolute path to the data file
-data_path = os.path.join(script_dir, '..', '02_Data_Exploration', '2_transformed_melb_data.csv')
+data_path = os.path.join(script_dir, '..', '02_Exploratory_Data_Analysis', '2_transformed_melb_data.csv')
 
 # Load the transformed Melbourne housing dataset
 melb_data = pd.read_csv(data_path)
@@ -57,6 +58,40 @@ model = sm.OLS(y, X).fit()
 
 # Printing the summary of the regression model
 print(model.summary())
+
+fitted_values = model.fittedvalues
+residuals = model.resid
+influence = model.get_influence()
+leverage = influence.hat_matrix_diag
+cooks = influence.cooks_distance[0]
+
+# Residuals vs Fitted Values Plot
+plt.figure()
+plt.scatter(fitted_values, residuals)
+plt.xlabel('Fitted Values')
+plt.ylabel('Residuals')
+plt.title('Residuals vs. Fitted Values')
+plt.axhline(y=0, color='grey', linestyle='dashed')
+plt.show()
+
+# Q-Q Plot
+fig = sm.qqplot(residuals, line='45', fit=True)
+plt.title('Normal Q-Q')
+plt.show()
+
+# Scale-Location Plot (also known as Spread-Location Plot)
+plt.figure()
+plt.scatter(fitted_values, np.sqrt(np.abs(residuals)))
+plt.xlabel('Fitted Values')
+plt.ylabel('Sqrt(Abs(Residuals))')
+plt.title('Scale-Location Plot')
+plt.show()
+
+# Residuals vs Leverage Plot
+plt.figure()
+sm.graphics.influence_plot(model, criterion="cooks")
+plt.title('Residuals vs Leverage')
+plt.show()
 
 # ! Detecting Multicollinearity with VIF (For high condition number)
 '''

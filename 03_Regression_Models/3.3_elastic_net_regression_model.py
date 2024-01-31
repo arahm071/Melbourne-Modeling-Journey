@@ -18,7 +18,7 @@ from statsmodels.stats.stattools import durbin_watson
 script_dir = os.path.abspath(os.path.dirname(__file__))
 
 # Build the absolute path to the data file
-data_path = os.path.join(script_dir, '..', '02_Data_Exploration', '2_transformed_melb_data.csv')
+data_path = os.path.join(script_dir, '..', '02_Exploratory_Data_Analysis', '2_transformed_melb_data.csv')
 
 # Load the transformed Melbourne housing dataset
 melb_data = pd.read_csv(data_path)
