@@ -94,6 +94,9 @@ sns.heatmap(correlation_matrix, annot=True)
 plt.title("Correlation Matrix")
 plt.show()
 
+#Descriptive statistics of melb_data
+print(melb_data.describe())
+
 # Identify and handle outliers for 'Landsize' column
 q1 = melb_data['Landsize'].quantile(0.25)
 q3 = melb_data['Landsize'].quantile(0.75)
@@ -127,6 +130,9 @@ plt.show()
 #Pairplot (Which also contain Linearity Check (Don't use any catergorical variables))
 sns.pairplot(data=transformed_df[melb_transformed_columns])
 plt.show()
+
+#Descriptive statistics of transformed_df
+print(transformed_df.describe())
 
 # Construct the full file path
 output_file_path = os.path.join(script_dir, '2_transformed_melb_data.csv')

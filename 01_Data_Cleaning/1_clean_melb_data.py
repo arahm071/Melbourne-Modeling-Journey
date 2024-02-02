@@ -26,7 +26,6 @@ melb_data['Date'] = melb_data['Date'].dt.date
 # Remove duplicate entries from the dataset to ensure data integrity
 melb_data.drop_duplicates(inplace=True)
 
-
 # Fill missing values in the 'Car' column with 0
 # Assuming that missing values imply no car space available
 melb_data.fillna(value={'Car': 0}, inplace=True)

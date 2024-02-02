@@ -70,7 +70,7 @@ plt.figure()
 plt.scatter(fitted_values, residuals)
 plt.xlabel('Fitted Values')
 plt.ylabel('Residuals')
-plt.title('Residuals vs. Fitted Values')
+plt.title('OLS, Residuals vs. Fitted Values')
 plt.axhline(y=0, color='grey', linestyle='dashed')
 plt.show()
 

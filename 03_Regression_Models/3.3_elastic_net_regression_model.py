@@ -7,11 +7,14 @@ import numpy as np            # Scientific computing library
 import matplotlib.pyplot as plt  # Plotting library for creating static and interactive visualizations
 import seaborn as sns         # Data visualization library based on matplotlib
 import statsmodels.api as sm  # Statistical models including OLS regression
+import scipy.stats as stats
 from sklearn.preprocessing import StandardScaler  # StandardScaler for normalization
 from sklearn.model_selection import train_test_split, RepeatedKFold, cross_val_score
-from sklearn.linear_model import ElasticNet, ElasticNetCV
-from sklearn.metrics import mean_squared_error
-import scipy.stats as stats
+from sklearn.linear_model import ElasticNet, ElasticNetCV, enet_path
+from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
+from statsmodels.stats.diagnostic import het_breuschpagan
+from statsmodels.tools.tools import add_constant
+
 from statsmodels.stats.stattools import durbin_watson
 
 # Get the absolute path to the directory of the current script
@@ -83,18 +86,22 @@ print(f"Test score: {test_score}")
 print(f"Number of features used: {coeff_used}")
 
 # Predict on the test data
-y_pred = elastic_net.predict(X_test)
+y_pred = model.predict(X_test)
 
 # Calculate the mean squared error
 mse = mean_squared_error(y_test, y_pred)
 print(f"Mean Squared Error: {mse}")
+
+# Calculating the mean absolute error
+mae = mean_absolute_error(y_test, y_pred)
+print(f"Mean Absolute Error: {mae}")
 
 # * Model Diagnostics
 
 # Residual Analysis 
 residuals = y_test - y_pred
 plt.scatter(y_pred, residuals)
-plt.title('Residuals vs Predicted')
+plt.title('Elastic Net, Residuals vs Predicted')
 plt.xlabel('Predicted values')
 plt.ylabel('Residuals')
 plt.axhline(y=0, color='r', linestyle='-')
@@ -120,3 +127,31 @@ print("Condition Number:", condition_number)
 # Autocorrelation Check (Durbin-Watson Test)
 dw = durbin_watson(residuals)
 print("Durbin-Watson statistic:", dw)
+
+# Compute the Elastic Net path with enet_path function
+alphas, coefs, _ = enet_path(X, y)
+
+# Plotting the Elastic Net path
+plt.figure()
+for coef, feature in zip(coefs, X.columns):
+    plt.plot(alphas, coef, label=feature)
+
+plt.xscale('log')
+plt.xlabel('Alpha')
+plt.ylabel('Coefficient')
+plt.title('Elastic Net Path')
+plt.legend()
+plt.axis('tight')
+plt.show()
+
+# R-squared
+r2 = r2_score(y_test, y_pred)
+print(f"R-squared: {r2}")
+
+# Jarque-Bera Test
+jb_statistic, jb_p_value = stats.jarque_bera(residuals)
+print(f"Jarque-Bera: {jb_statistic, jb_p_value}")
+
+# Breusch-Pagan Test
+bp_test = het_breuschpagan(residuals, add_constant(X_test) )
+print(f"Breusch-Pagan: {bp_test}")
