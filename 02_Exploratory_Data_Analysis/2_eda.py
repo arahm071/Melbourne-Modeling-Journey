@@ -8,6 +8,8 @@ import matplotlib.pyplot as plt  # Plotting library for creating static and inte
 import seaborn as sns            # Data visualization library based on matplotlib
 import scipy                     # Library for scientific and technical computing
 
+# * File importation
+
 # Get the absolute path to the directory of the current script
 script_dir = os.path.abspath(os.path.dirname(__file__))
 
@@ -19,6 +21,8 @@ melb_data = pd.read_csv(data_path)
 
 # Define columns for analysis
 melb_columns = ['Price', 'Distance', 'NewBed', 'Bathroom', 'Car', 'Landsize']
+
+# * Setup plotting for analysis
 
 def plot_skew(data, column_list, rows, cols, fig_x=15, fig_y=15):
     """
@@ -80,6 +84,8 @@ def plot_outliers(data, column_list, rows, cols, fig_x=15, fig_y=15):
     plt.tight_layout()  # Adjust layout to prevent overlap
     plt.show()  # Display the plot
 
+# * Pre-Analysis
+
 # Perform initial plotting of data
 plot_skew(data=melb_data, column_list=melb_columns, rows=2, cols=3)
 plot_outliers(data=melb_data, column_list=melb_columns, rows=2, cols=3)
@@ -97,6 +103,8 @@ plt.show()
 #Descriptive statistics of melb_data
 print(melb_data.describe())
 
+# * Tranfomation Prcoess
+
 # Identify and handle outliers for 'Landsize' column
 q1 = melb_data['Landsize'].quantile(0.25)
 q3 = melb_data['Landsize'].quantile(0.75)
@@ -108,11 +116,16 @@ transformed_df = melb_data[(melb_data['Landsize'] >= lower) & (melb_data['Landsi
 # Apply log transformation to 'Price' column
 transformed_df['Price'] = np.log(transformed_df['Price'])
 
+#Create Indicator Variable for 'Landsize_no_outliers'
+transformed_df['Landsize_no_outliers_Indicator'] = np.where(transformed_df['Landsize'] == 0, 1, 0)
+
 # Rename columns to reflect transformations
 transformed_df.rename(columns={"Price": "Price_log", "Landsize": "Landsize_no_outliers"}, inplace=True)
 
 # Redefine columns for the transformed data
 melb_transformed_columns = ['Price_log', 'Distance', 'NewBed', 'Bathroom', 'Car', 'Landsize_no_outliers']
+
+# * Post-Analysis
 
 # Plot histograms and boxplots for the transformed data
 plot_skew(data=transformed_df, column_list=melb_transformed_columns, rows=2, cols=3)
