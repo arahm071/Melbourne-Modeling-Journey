@@ -116,14 +116,14 @@ transformed_df = melb_data[(melb_data['Landsize'] >= lower) & (melb_data['Landsi
 # Apply log transformation to 'Price' column
 transformed_df['Price'] = np.log(transformed_df['Price'])
 
-#Create Indicator Variable for 'Landsize_no_outliers'
-transformed_df['Landsize_no_outliers_Indicator'] = np.where(transformed_df['Landsize'] == 0, 1, 0)
-
 # Rename columns to reflect transformations
 transformed_df.rename(columns={"Price": "Price_log", "Landsize": "Landsize_no_outliers"}, inplace=True)
 
 # Redefine columns for the transformed data
 melb_transformed_columns = ['Price_log', 'Distance', 'NewBed', 'Bathroom', 'Car', 'Landsize_no_outliers']
+
+#Create Indicator Variable for 'Landsize_no_outliers'
+transformed_df['Landsize_no_outliers_Indicator'] = np.where(transformed_df['Landsize_no_outliers'] == 0, 1, 0)
 
 # * Post-Analysis
 
