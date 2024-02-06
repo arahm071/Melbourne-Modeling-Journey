@@ -6,10 +6,10 @@ import pandas as pd              # Data manipulation and analysis library
 import numpy as np               # Scientific computing library
 import matplotlib.pyplot as plt  # Plotting library for creating static and interactive visualizations
 import seaborn as sns            # Data visualization library based on matplotlib
-from scipy import stats          # Library for scientific and technical computing
-from sklearn.preprocessing import MinMaxScaler
+from scipy import stats                         # Library for scientific and technical computing
+from sklearn.preprocessing import MinMaxScaler  # Feature scaling library
 
-# * File importation
+# * File Importation
 
 # Get the absolute path to the directory of the current script
 script_dir = os.path.abspath(os.path.dirname(__file__))
@@ -23,7 +23,7 @@ melb_data = pd.read_csv(data_path)
 # Define columns for analysis
 melb_columns = ['Price', 'Distance', 'NewBed', 'Bathroom', 'Car', 'Landsize']
 
-# * Setup plotting for analysis
+# * Setup For Pre-Analysis Visualization
 
 def plot_skew(data, column_list, rows, cols, fig_x=15, fig_y=15):
     """
@@ -94,9 +94,9 @@ plot_outliers(data=melb_data, column_list=melb_columns, rows=2, cols=3)
 # Print skewness for selected variables from the melb_data dataframe
 print(melb_data[melb_columns].skew())
 
-#Pairplot
+# Generating pairplot for selected variables to visualize distributions and relationships
 sns.pairplot(data=melb_data[melb_columns])
-plt.show()
+plt.show()  # Display the pairplot
 
 # Compute and display correlation matrix for the numerical variables in the dataset
 correlation_matrix = melb_data[melb_columns].corr()
@@ -107,7 +107,7 @@ plt.show()
 #Descriptive statistics of melb_data
 print(melb_data.describe())
 
-# * Tranfomation Prcoess
+# * Data Transformation Process
 
 # Identify and handle outliers for 'Landsize' column
 q1 = melb_data['Landsize'].quantile(0.25)
@@ -117,25 +117,30 @@ upper = q3 + (1.5 * IQR)
 lower = q1 - (1.5 * IQR)
 transformed_df = melb_data[(melb_data['Landsize'] >= lower) & (melb_data['Landsize'] <= upper)].copy()
 
-#Create Indicator Variable for 'Landsize'
+# Creating an indicator variable for properties with no land size listed
 transformed_df['Landsize_Indicator'] = np.where(transformed_df['Landsize'] == 0, 1, 0)
 
-# Trasnformation
+# Applying transformations to reduce skewness and normalize distributions
+# Box-Cox transformation for 'Price' to address skewness
 transformed_df['Price'], fitted_lambda = stats.boxcox(transformed_df['Price'])
+
+# Yeo-Johnson transformation for 'Distance', 'NewBed', and 'Car' to normalize data
 transformed_df['Distance'], fitted_lambda = stats.yeojohnson(transformed_df['Distance'])
 transformed_df['NewBed'], fitted_lambda = stats.yeojohnson(transformed_df['NewBed'])
-transformed_df['Bathroom'], fitted_lambda = stats.boxcox(transformed_df['Bathroom'])
 transformed_df['Car'], fitted_lambda = stats.yeojohnson(transformed_df['Car'])
 
-# Rename columns to reflect transformations
-transformed_df.rename(columns={"Price": "Price_boxcox", 
-                               "Distance": "Distance_yeojohnson",
-                               "NewBed": "NewBed_yeojohnson",
-                               "Bathroom": "Bathroom_boxcox",
-                               "Car": "Car_yeojohnson",
-                               "Landsize": "Landsize_no_out"}, 
-                      inplace=True)
+# Box-Cox transformation for 'Bathroom' to normalize data
+transformed_df['Bathroom'], fitted_lambda = stats.boxcox(transformed_df['Bathroom'])
 
+# Renaming columns to reflect the type of transformations applied
+transformed_df.rename(columns={
+    "Price": "Price_boxcox", 
+    "Distance": "Distance_yeojohnson",
+    "NewBed": "NewBed_yeojohnson",
+    "Bathroom": "Bathroom_boxcox",
+    "Car": "Car_yeojohnson",
+    "Landsize": "Landsize_no_outliers"
+}, inplace=True)
 
 # Create an instance of MinMaxScaler
 scaler = MinMaxScaler()
@@ -162,12 +167,15 @@ sns.heatmap(correlation_matrix_transformed, annot=True)
 plt.title("Correlation Matrix After Transformations")
 plt.show()
 
-#Pairplot (Which also contain Linearity Check (Don't use any catergorical variables))
+# Generating pairplot for the transformed variables to visualize distributions, relationships,
+# and conduct a basic linearity check (excluding categorical variables)
 sns.pairplot(data=transformed_df[melb_transformed_columns])
-plt.show()
+plt.show()  # Display the pairplot
 
 #Descriptive statistics of transformed_df
 print(transformed_df.describe())
+
+# * File Exportation
 
 # Construct the full file path
 output_file_path = os.path.join(script_dir, '2_transformed_melb_data.csv')

@@ -7,13 +7,15 @@ import numpy as np            # Scientific computing library
 import matplotlib.pyplot as plt  # Plotting library for creating static and interactive visualizations
 import seaborn as sns         # Data visualization library based on matplotlib
 import statsmodels.api as sm  # Statistical models including OLS regression
-import scipy.stats as stats
-from sklearn.model_selection import train_test_split, RepeatedKFold, cross_val_score
-from sklearn.linear_model import Lasso, LassoCV, lasso_path
-from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
-from statsmodels.stats.stattools import durbin_watson
-from statsmodels.stats.diagnostic import het_breuschpagan
-from statsmodels.tools.tools import add_constant
+import scipy.stats as stats   # Scientific computing and statistics library
+from sklearn.model_selection import train_test_split, RepeatedKFold, cross_val_score  # Model selection and evaluation tools
+from sklearn.linear_model import Lasso, LassoCV, lasso_path                           # Linear models for regression
+from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error         # Metrics for model evaluation
+from statsmodels.stats.stattools import durbin_watson                                 # Durbin-Watson statistic for detecting autocorrelation
+from statsmodels.stats.diagnostic import het_breuschpagan                             # Breusch-Pagan test for heteroscedasticity
+from statsmodels.tools.tools import add_constant                                      # Adds a constant term to an array for modeling
+
+# * File Importation
 
 # Get the absolute path to the directory of the current script
 script_dir = os.path.abspath(os.path.dirname(__file__))
@@ -24,17 +26,21 @@ data_path = os.path.join(script_dir, '..', '02_Exploratory_Data_Analysis', '2_tr
 # Load the transformed Melbourne housing dataset
 melb_data = pd.read_csv(data_path)
 
+# * Prepare Data For Model Fitting
+
 # Creating dummy variables for categorical columns
 dummies_Suburb = pd.get_dummies(melb_data['Suburb'], drop_first=True, dtype=int)
 dummies_Regionname = pd.get_dummies(melb_data['Regionname'], drop_first=True, dtype=int)
 dummies_Type = pd.get_dummies(melb_data['Type'], drop_first=True, dtype=int)
 dummies_Method = pd.get_dummies(melb_data['Method'], drop_first=True, dtype=int)
 
-'''#Creating Interactions
+# Creating interaction terms
+'''
 melb_data['NewBed_yeojohnson x Bathroom_boxcox'] = melb_data['NewBed_yeojohnson'] * melb_data['Bathroom_boxcox']
 melb_data['NewBed_yeojohnson x Car_yeojohnson'] = melb_data['NewBed_yeojohnson'] * melb_data['Car_yeojohnson']
 melb_data['Distance_yeojohnson x Landsize_no_out'] = melb_data['Distance_yeojohnson'] * melb_data['Landsize_no_out']
-melb_data['Car_yeojohnson x Landsize_no_out'] = melb_data['Car_yeojohnson'] * melb_data['Landsize_no_out']'''
+melb_data['Car_yeojohnson x Landsize_no_out'] = melb_data['Car_yeojohnson'] * melb_data['Landsize_no_out']
+'''
 
 # Concatenating the dummy variables with the main DataFrame
 melb_data = pd.concat([melb_data, dummies_Regionname, dummies_Type, dummies_Method], axis=1)
@@ -50,6 +56,8 @@ y = melb_data['Price_boxcox']
 # Splitting the data into training and test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
 
+# * Cross-Validation and GridSearch
+
 '''
 # Define a cross-validation strategy for LassoCV
 cv = RepeatedKFold(n_splits=10, n_repeats=3, random_state=1)
@@ -63,6 +71,8 @@ lasso_cv.fit(X_train, y_train)
 # Output the optimal alpha value determined by cross-validation
 print(f"Optimal alpha: {lasso_cv.alpha_}")
 '''
+
+# * Model Fitting
 
 # Initialize the Lasso regression model with an alpha value
 lasso = Lasso(alpha=0.00001)
@@ -82,6 +92,10 @@ print(f"Number of features used: {coeff_used}")
 # Predicting on the test data
 y_pred = model.predict(X_test)
 
+# Coefficients 
+coefficients = model.coef_
+print(f"Coefficients: {coefficients}")
+
 # Calculating the mean squared error
 mse = mean_squared_error(y_test, y_pred)
 print(f"Mean Squared Error: {mse}")
@@ -91,10 +105,6 @@ mae = mean_absolute_error(y_test, y_pred)
 print(f"Mean Absolute Error: {mae}")
 
 # * Model Diagnostics
-
-'''# Coefficients
-coefficients = model.coef_
-print(f"Coefficients: {coefficients}")'''
 
 # Residual Analysis
 residuals = y_test - y_pred
@@ -148,11 +158,11 @@ print(f"R-squared: {r2}")
 
 # Jarque-Bera Test
 jb_statistic, jb_p_value = stats.jarque_bera(residuals)
-print(f"Jarque-Bera: {jb_statistic, jb_p_value}")
+print(f"Jarque-Bera Test Statistic: {jb_statistic}, p-value: {jb_p_value}")
 
 # Breusch-Pagan Test
-bp_test = het_breuschpagan(residuals, add_constant(X_test) )
-print(f"Breusch-Pagan: {bp_test}")
+bp_test = het_breuschpagan(residuals, add_constant(X_test))
+print(f"Breusch-Pagan Test: {bp_test}")
 
 '''
 # External Validation

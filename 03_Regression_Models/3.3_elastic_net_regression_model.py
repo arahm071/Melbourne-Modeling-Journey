@@ -7,15 +7,15 @@ import numpy as np            # Scientific computing library
 import matplotlib.pyplot as plt  # Plotting library for creating static and interactive visualizations
 import seaborn as sns         # Data visualization library based on matplotlib
 import statsmodels.api as sm  # Statistical models including OLS regression
-import scipy.stats as stats
-from sklearn.preprocessing import StandardScaler  # StandardScaler for normalization
-from sklearn.model_selection import train_test_split, RepeatedKFold, cross_val_score
-from sklearn.linear_model import ElasticNet, ElasticNetCV, enet_path
-from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
-from statsmodels.stats.diagnostic import het_breuschpagan
-from statsmodels.tools.tools import add_constant
+import scipy.stats as stats   # Scientific computing and statistics library
+from sklearn.model_selection import train_test_split, RepeatedKFold, cross_val_score  # Model selection and evaluation tools
+from sklearn.linear_model import ElasticNet, ElasticNetCV, enet_path                  # Linear models for regression
+from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error         # Metrics for model evaluation
+from statsmodels.stats.stattools import durbin_watson                                 # Durbin-Watson statistic for detecting autocorrelation
+from statsmodels.stats.diagnostic import het_breuschpagan                             # Breusch-Pagan test for heteroscedasticity
+from statsmodels.tools.tools import add_constant                                      # Adds a constant term to an array for modeling
 
-from statsmodels.stats.stattools import durbin_watson
+# * File Importation
 
 # Get the absolute path to the directory of the current script
 script_dir = os.path.abspath(os.path.dirname(__file__))
@@ -26,12 +26,7 @@ data_path = os.path.join(script_dir, '..', '02_Exploratory_Data_Analysis', '2_tr
 # Load the transformed Melbourne housing dataset
 melb_data = pd.read_csv(data_path)
 
-# Initialize the StandardScaler
-scaler = StandardScaler()
-
-# Applying StandardScaler to continuous variables
-melb_data['Distance'] = scaler.fit_transform(melb_data[['Distance']])
-melb_data['Landsize_no_outliers'] = scaler.fit_transform(melb_data[['Landsize_no_outliers']])
+# * Prepare Data For Model Fitting
 
 # Creating dummy variables for categorical columns
 dummies_Suburb = pd.get_dummies(melb_data['Suburb'], drop_first=True, dtype=int)
@@ -53,6 +48,8 @@ y = melb_data['Price_log']
 # Splitting the data into training and test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
 
+# * Cross-Validation and GridSearch
+
 '''
 # Define a cross-validation strategy
 cv = RepeatedKFold(n_splits=5, n_repeats=1, random_state=1)  # Reduced for testing
@@ -69,6 +66,8 @@ elastic_net_cv.fit(X_train, y_train)
 print(f"Optimal alpha: {elastic_net_cv.alpha_}")
 print(f"Optimal l1_ratio: {elastic_net_cv.l1_ratio_}")
 '''
+
+# * Model Fitting
 
 # Initialize the Elastic Net regression model with an alpha value
 elastic_net = ElasticNet(alpha=0.00001, l1_ratio=0.9500000000000001)
@@ -87,6 +86,10 @@ print(f"Number of features used: {coeff_used}")
 
 # Predict on the test data
 y_pred = model.predict(X_test)
+
+# Coefficients 
+coefficients = model.coef_
+print(f"Coefficients: {coefficients}")
 
 # Calculate the mean squared error
 mse = mean_squared_error(y_test, y_pred)
@@ -107,11 +110,11 @@ plt.ylabel('Residuals')
 plt.axhline(y=0, color='r', linestyle='-')
 plt.show()
 
-# Feature Importance
+# Displaying Feature Importance
 feature_importance = pd.DataFrame(model.coef_, index=X.columns, columns=['importance'])
 print(feature_importance.sort_values(by='importance', ascending=False).to_string())
 
-# Cross-validation
+# Performing Cross-validation
 scores = cross_val_score(model, X, y, cv=5)
 print("Cross-validated scores:", scores)
 
@@ -119,12 +122,12 @@ print("Cross-validated scores:", scores)
 stats.probplot(residuals, dist="norm", plot=plt)
 plt.show()
 
-# Condition Number
+# Checking the Condition Number
 coef_matrix = np.array([model.coef_])
 condition_number = np.linalg.cond(coef_matrix)
 print("Condition Number:", condition_number)
 
-# Autocorrelation Check (Durbin-Watson Test)
+# Checking for Autocorrelation (Durbin-Watson Test)
 dw = durbin_watson(residuals)
 print("Durbin-Watson statistic:", dw)
 
@@ -150,7 +153,7 @@ print(f"R-squared: {r2}")
 
 # Jarque-Bera Test
 jb_statistic, jb_p_value = stats.jarque_bera(residuals)
-print(f"Jarque-Bera: {jb_statistic, jb_p_value}")
+print(f"Jarque-Bera Test Statistic: {jb_statistic}, p-value: {jb_p_value}")
 
 # Breusch-Pagan Test
 bp_test = het_breuschpagan(residuals, add_constant(X_test) )
