@@ -139,7 +139,7 @@ transformed_df.rename(columns={
     "NewBed": "NewBed_yeojohnson",
     "Bathroom": "Bathroom_boxcox",
     "Car": "Car_yeojohnson",
-    "Landsize": "Landsize_no_outliers"
+    "Landsize": "Landsize_no_out"
 }, inplace=True)
 
 # Create an instance of MinMaxScaler
