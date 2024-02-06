@@ -6,7 +6,8 @@ import pandas as pd              # Data manipulation and analysis library
 import numpy as np               # Scientific computing library
 import matplotlib.pyplot as plt  # Plotting library for creating static and interactive visualizations
 import seaborn as sns            # Data visualization library based on matplotlib
-import scipy                     # Library for scientific and technical computing
+from scipy import stats          # Library for scientific and technical computing
+from sklearn.preprocessing import MinMaxScaler
 
 # * File importation
 
@@ -90,6 +91,9 @@ def plot_outliers(data, column_list, rows, cols, fig_x=15, fig_y=15):
 plot_skew(data=melb_data, column_list=melb_columns, rows=2, cols=3)
 plot_outliers(data=melb_data, column_list=melb_columns, rows=2, cols=3)
 
+# Print skewness for selected variables from the melb_data dataframe
+print(melb_data[melb_columns].skew())
+
 #Pairplot
 sns.pairplot(data=melb_data[melb_columns])
 plt.show()
@@ -113,17 +117,35 @@ upper = q3 + (1.5 * IQR)
 lower = q1 - (1.5 * IQR)
 transformed_df = melb_data[(melb_data['Landsize'] >= lower) & (melb_data['Landsize'] <= upper)].copy()
 
-# Apply log transformation to 'Price' column
-transformed_df['Price'] = np.log(transformed_df['Price'])
+#Create Indicator Variable for 'Landsize'
+transformed_df['Landsize_Indicator'] = np.where(transformed_df['Landsize'] == 0, 1, 0)
+
+# Trasnformation
+transformed_df['Price'], fitted_lambda = stats.boxcox(transformed_df['Price'])
+transformed_df['Distance'], fitted_lambda = stats.yeojohnson(transformed_df['Distance'])
+transformed_df['NewBed'], fitted_lambda = stats.yeojohnson(transformed_df['NewBed'])
+transformed_df['Bathroom'], fitted_lambda = stats.boxcox(transformed_df['Bathroom'])
+transformed_df['Car'], fitted_lambda = stats.yeojohnson(transformed_df['Car'])
 
 # Rename columns to reflect transformations
-transformed_df.rename(columns={"Price": "Price_log", "Landsize": "Landsize_no_outliers"}, inplace=True)
+transformed_df.rename(columns={"Price": "Price_boxcox", 
+                               "Distance": "Distance_yeojohnson",
+                               "NewBed": "NewBed_yeojohnson",
+                               "Bathroom": "Bathroom_boxcox",
+                               "Car": "Car_yeojohnson",
+                               "Landsize": "Landsize_no_out"}, 
+                      inplace=True)
+
+
+# Create an instance of MinMaxScaler
+scaler = MinMaxScaler()
+
+# Fit the scaler to the data and transform the data
+transformed_df['Distance_yeojohnson'] = scaler.fit_transform(transformed_df[['Distance_yeojohnson']])
+transformed_df['Landsize_no_out'] = scaler.fit_transform(transformed_df[['Landsize_no_out']])
 
 # Redefine columns for the transformed data
-melb_transformed_columns = ['Price_log', 'Distance', 'NewBed', 'Bathroom', 'Car', 'Landsize_no_outliers']
-
-#Create Indicator Variable for 'Landsize_no_outliers'
-transformed_df['Landsize_no_outliers_Indicator'] = np.where(transformed_df['Landsize_no_outliers'] == 0, 1, 0)
+melb_transformed_columns = ['Price_boxcox', 'Distance_yeojohnson', 'NewBed_yeojohnson', 'Bathroom_boxcox', 'Car_yeojohnson', 'Landsize_no_out']
 
 # * Post-Analysis
 
