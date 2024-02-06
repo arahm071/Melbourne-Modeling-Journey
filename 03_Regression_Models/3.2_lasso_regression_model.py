@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt  # Plotting library for creating static and inte
 import seaborn as sns         # Data visualization library based on matplotlib
 import statsmodels.api as sm  # Statistical models including OLS regression
 import scipy.stats as stats
-from sklearn.preprocessing import StandardScaler  # StandardScaler for normalization
 from sklearn.model_selection import train_test_split, RepeatedKFold, cross_val_score
 from sklearn.linear_model import Lasso, LassoCV, lasso_path
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
@@ -25,18 +24,17 @@ data_path = os.path.join(script_dir, '..', '02_Exploratory_Data_Analysis', '2_tr
 # Load the transformed Melbourne housing dataset
 melb_data = pd.read_csv(data_path)
 
-# Initialize the StandardScaler
-scaler = StandardScaler()
-
-# Applying StandardScaler to continuous variables
-melb_data['Distance'] = scaler.fit_transform(melb_data[['Distance']])
-melb_data['Landsize_no_outliers'] = scaler.fit_transform(melb_data[['Landsize_no_outliers']])
-
 # Creating dummy variables for categorical columns
 dummies_Suburb = pd.get_dummies(melb_data['Suburb'], drop_first=True, dtype=int)
 dummies_Regionname = pd.get_dummies(melb_data['Regionname'], drop_first=True, dtype=int)
 dummies_Type = pd.get_dummies(melb_data['Type'], drop_first=True, dtype=int)
 dummies_Method = pd.get_dummies(melb_data['Method'], drop_first=True, dtype=int)
+
+'''#Creating Interactions
+melb_data['NewBed_yeojohnson x Bathroom_boxcox'] = melb_data['NewBed_yeojohnson'] * melb_data['Bathroom_boxcox']
+melb_data['NewBed_yeojohnson x Car_yeojohnson'] = melb_data['NewBed_yeojohnson'] * melb_data['Car_yeojohnson']
+melb_data['Distance_yeojohnson x Landsize_no_out'] = melb_data['Distance_yeojohnson'] * melb_data['Landsize_no_out']
+melb_data['Car_yeojohnson x Landsize_no_out'] = melb_data['Car_yeojohnson'] * melb_data['Landsize_no_out']'''
 
 # Concatenating the dummy variables with the main DataFrame
 melb_data = pd.concat([melb_data, dummies_Regionname, dummies_Type, dummies_Method], axis=1)
@@ -46,8 +44,8 @@ excluded_columns = ['Address', 'Suburb', 'Regionname', 'Type', 'Method', 'Date',
 melb_data.drop(excluded_columns, axis=1, inplace=True)
 
 # Assign Independent and Dependent variables
-X = melb_data.drop('Price_log', axis=1)
-y = melb_data['Price_log']
+X = melb_data.drop('Price_boxcox', axis=1)
+y = melb_data['Price_boxcox']
 
 # Splitting the data into training and test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)

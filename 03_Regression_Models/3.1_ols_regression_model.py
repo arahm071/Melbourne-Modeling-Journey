@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt  # Plotting library for creating static and inte
 import seaborn as sns         # Data visualization library based on matplotlib
 import statsmodels.api as sm  # Statistical models including OLS regression
 from statsmodels.stats.outliers_influence import variance_inflation_factor  # VIF calculation
-from sklearn.preprocessing import StandardScaler  # StandardScaler for normalization
 from statsmodels.stats.outliers_influence import OLSInfluence
 
 # Get the absolute path to the directory of the current script
@@ -19,13 +18,6 @@ data_path = os.path.join(script_dir, '..', '02_Exploratory_Data_Analysis', '2_tr
 
 # Load the transformed Melbourne housing dataset
 melb_data = pd.read_csv(data_path)
-
-# Initialize the StandardScaler
-scaler = StandardScaler()
-
-# Applying StandardScaler to continuous variables
-melb_data['Distance'] = scaler.fit_transform(melb_data[['Distance']])
-melb_data['Landsize_no_outliers'] = scaler.fit_transform(melb_data[['Landsize_no_outliers']])
 
 # Creating dummy variables for categorical columns
 # ! dummies_Suburb = pd.get_dummies(melb_data['Suburb'], drop_first=True, dtype=int)
@@ -49,9 +41,9 @@ excluded_columns = ['Address', 'Suburb', 'Regionname', 'Type', 'Method', 'Date',
 melb_data.drop(excluded_columns, axis=1, inplace=True)
 
 # Preparing the features (X) and target variable (y) for the regression model
-X = melb_data.drop('Price_log', axis=1)
+X = melb_data.drop('Price_boxcox', axis=1)
 X = sm.add_constant(X)  # Adding a constant term for the regression intercept
-y = melb_data['Price_log']
+y = melb_data['Price_boxcox']
 
 # Fitting the Ordinary Least Squares (OLS) regression model
 model = sm.OLS(y, X).fit()
