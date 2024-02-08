@@ -48,7 +48,7 @@ y = melb_data['Price_log']
 # Splitting the data into training and test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
 
-# * Cross-Validation and GridSearch
+# * GridSearch and Cross-Validation 
 
 '''
 # Define a cross-validation strategy
@@ -153,7 +153,7 @@ print(f"R-squared: {r2}")
 
 # Jarque-Bera Test
 jb_statistic, jb_p_value = stats.jarque_bera(residuals)
-print(f"Jarque-Bera Test Statistic: {jb_statistic}, p-value: {jb_p_value}")
+print(f"Jarque-Bera Test: Statistic: {jb_statistic}, p-value: {jb_p_value}")
 
 # Breusch-Pagan Test
 bp_test = het_breuschpagan(residuals, add_constant(X_test) )
