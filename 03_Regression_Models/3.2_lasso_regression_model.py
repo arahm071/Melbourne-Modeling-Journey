@@ -109,6 +109,24 @@ residuals = y_test - y_pred
 
 # * Model Diagnostics
 
+def calculate_adjusted_r_squared(r_squared, n, p):
+    """
+    Calculate the adjusted R-squared value for a regression model.
+
+    Adjusted R-squared accounts for the number of predictors in the model, providing a
+    metric that penalizes for excessive use of uninformative predictors.
+
+    Parameters:
+    - r_squared (float): The R-squared value from the model.
+    - n (int): The total number of observations in the dataset.
+    - p (int): The number of predictors (independent variables) in the model.
+
+    Returns:
+    - float: Adjusted R-squared value.
+    """
+    adjusted_r_squared = 1 - ((1 - r_squared) * (n - 1) / (n - p - 1))
+    return adjusted_r_squared
+
 # Residual Analysis
 plt.scatter(y_pred, residuals)
 plt.title('Lasso, Residuals vs Predicted')
@@ -157,6 +175,10 @@ plt.show()
 # R-squared
 r2 = r2_score(y_test, y_pred)
 print(f"R-squared: {r2}")
+
+# Adjusted R-squared
+adj_r2 = calculate_adjusted_r_squared(r2, len(y_test), X_test.shape[1])
+print(f"Adjusted R-squared: {adj_r2}")
 
 # Jarque-Bera Test
 jb_statistic, jb_p_value = stats.jarque_bera(residuals)
