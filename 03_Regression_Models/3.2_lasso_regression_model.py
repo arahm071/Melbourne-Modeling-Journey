@@ -104,8 +104,14 @@ print(f"Mean Squared Error: {mse}")
 mae = mean_absolute_error(y_test, y_pred)
 print(f"Mean Absolute Error: {mae}")
 
-# Calculating the residuals
-residuals = y_test - y_pred
+# Calculate fitted values (predictions on the training set, a.k.a. y_training_predictions)
+fitted_values = model.predict(X_train)
+
+# Calculate residuals
+residuals = y_train - fitted_values
+
+# Calculate test residuals (prediction errors)
+test_residuals = y_test - y_pred
 
 # * Model Diagnostics
 
@@ -128,7 +134,7 @@ def calculate_adjusted_r_squared(r_squared, n, p):
     return adjusted_r_squared
 
 # Residual Analysis
-plt.scatter(y_pred, residuals)
+plt.scatter(fitted_values, residuals)
 plt.title('Lasso, Residuals vs Predicted')
 plt.xlabel('Predicted values')
 plt.ylabel('Residuals')
@@ -155,6 +161,14 @@ print("Condition Number:", condition_number)
 # Checking for Autocorrelation (Durbin-Watson Test)
 dw = durbin_watson(residuals)
 print("Durbin-Watson statistic:", dw)
+
+# Scale-Location Plot (also known as Spread-Location Plot)
+plt.figure()
+plt.scatter(fitted_values, np.sqrt(np.abs(residuals)))
+plt.xlabel('Fitted Values')
+plt.ylabel('Sqrt(Abs(Residuals))')
+plt.title('Scale-Location Plot')
+plt.show()
 
 # Compute the Lasso path with lasso_path function
 alphas, coefs, _ = lasso_path(X, y)
@@ -185,7 +199,7 @@ jb_statistic, jb_p_value = stats.jarque_bera(residuals)
 print(f"Jarque-Bera Test: Statistic: {jb_statistic}, p-value: {jb_p_value}")
 
 # Breusch-Pagan Test
-bp_test = het_breuschpagan(residuals, add_constant(X_test))
+bp_test = het_breuschpagan(residuals, add_constant(X_train))
 print(f"Breusch-Pagan Test: {bp_test}")
 
 '''

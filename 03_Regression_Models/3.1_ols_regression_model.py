@@ -71,7 +71,7 @@ fig = sm.qqplot(residuals, line='45', fit=True)
 plt.title('Normal Q-Q')
 plt.show()
 
-# Scale-Location Plot (also known as Spread-Location Plot)
+# Scale-Location Plot (a.k.a. Spread-Location Plot)
 plt.figure()
 plt.scatter(fitted_values, np.sqrt(np.abs(residuals)))
 plt.xlabel('Fitted Values')
