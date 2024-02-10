@@ -19,23 +19,6 @@ data_path = os.path.join(script_dir, '..', '02_Exploratory_Data_Analysis', '2_tr
 # Load the transformed Melbourne housing dataset
 melb_data = pd.read_csv(data_path)
 
-# Creating dummy variables for categorical columns
-# ! dummies_Suburb = pd.get_dummies(melb_data['Suburb'], drop_first=True, dtype=int)
-dummies_Regionname = pd.get_dummies(melb_data['Regionname'], drop_first=True, dtype=int)
-dummies_Type = pd.get_dummies(melb_data['Type'], drop_first=True, dtype=int)
-dummies_Method = pd.get_dummies(melb_data['Method'], drop_first=True, dtype=int)
-
-# ! Uncomment the following block if you want to use grouped suburb categories
-'''
-num_top_suburbs = 10
-top_suburbs = melb_data['Suburb'].value_counts().nlargest(num_top_suburbs).index
-Grouped_Suburb = melb_data['Suburb'].apply(lambda x: x if x in top_suburbs else 'Other')
-dummies_Grouped_Suburb = pd.get_dummies(Grouped_Suburb, drop_first=True, dtype=int)
-'''
-
-# Concatenating the dummy variables with the main DataFrame
-melb_data = pd.concat([melb_data, dummies_Regionname, dummies_Type, dummies_Method], axis=1)
-
 # Dropping columns not used in the regression model
 excluded_columns = ['Address', 'Suburb', 'Regionname', 'Type', 'Method', 'Date', 'Propertycount']
 melb_data.drop(excluded_columns, axis=1, inplace=True)

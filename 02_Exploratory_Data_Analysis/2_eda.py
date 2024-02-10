@@ -120,6 +120,29 @@ transformed_df = melb_data[(melb_data['Landsize'] >= lower) & (melb_data['Landsi
 # Creating an indicator variable for properties with no land size listed
 transformed_df['Landsize_Indicator'] = np.where(transformed_df['Landsize'] == 0, 1, 0)
 
+# Creating dummy variables for categorical columns
+# ! dummies_Suburb = pd.get_dummies(transformed_df['Suburb'], drop_first=True, dtype=int)
+dummies_Regionname = pd.get_dummies(transformed_df['Regionname'], drop_first=True, dtype=int)
+dummies_Type = pd.get_dummies(transformed_df['Type'], drop_first=True, dtype=int)
+dummies_Method = pd.get_dummies(transformed_df['Method'], drop_first=True, dtype=int)
+
+# ! Uncomment the following block if you want to use grouped suburb categories
+'''
+num_top_suburbs = 10
+top_suburbs = melb_data['Suburb'].value_counts().nlargest(num_top_suburbs).index
+Grouped_Suburb = melb_data['Suburb'].apply(lambda x: x if x in top_suburbs else 'Other')
+dummies_Grouped_Suburb = pd.get_dummies(Grouped_Suburb, drop_first=True, dtype=int)
+'''
+
+# Concatenating the dummy variables with the main DataFrame
+transformed_df = pd.concat([transformed_df, dummies_Regionname, dummies_Type, dummies_Method], axis=1)
+
+# Construct the full file path
+output_file_path_1 = os.path.join(script_dir, '2_untransformed_melb_data.csv')
+
+# Export transformed data to a new CSV file
+transformed_df.to_csv(output_file_path_1, index=False)
+
 # Applying transformations to reduce skewness and normalize distributions
 # Box-Cox transformation for 'Price' to address skewness
 transformed_df['Price'], fitted_lambda = stats.boxcox(transformed_df['Price'])
@@ -178,7 +201,7 @@ print(transformed_df.describe())
 # * File Exportation
 
 # Construct the full file path
-output_file_path = os.path.join(script_dir, '2_transformed_melb_data.csv')
+output_file_path_2 = os.path.join(script_dir, '2_transformed_melb_data.csv')
 
 # Export transformed data to a new CSV file
-transformed_df.to_csv(output_file_path, index=False)
+transformed_df.to_csv(output_file_path_2, index=False)

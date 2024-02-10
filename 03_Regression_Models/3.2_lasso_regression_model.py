@@ -28,23 +28,6 @@ melb_data = pd.read_csv(data_path)
 
 # * Prepare Data For Model Fitting
 
-# Creating dummy variables for categorical columns
-dummies_Suburb = pd.get_dummies(melb_data['Suburb'], drop_first=True, dtype=int)
-dummies_Regionname = pd.get_dummies(melb_data['Regionname'], drop_first=True, dtype=int)
-dummies_Type = pd.get_dummies(melb_data['Type'], drop_first=True, dtype=int)
-dummies_Method = pd.get_dummies(melb_data['Method'], drop_first=True, dtype=int)
-
-# Creating interaction terms
-'''
-melb_data['NewBed_yeojohnson x Bathroom_boxcox'] = melb_data['NewBed_yeojohnson'] * melb_data['Bathroom_boxcox']
-melb_data['NewBed_yeojohnson x Car_yeojohnson'] = melb_data['NewBed_yeojohnson'] * melb_data['Car_yeojohnson']
-melb_data['Distance_yeojohnson x Landsize_no_out'] = melb_data['Distance_yeojohnson'] * melb_data['Landsize_no_out']
-melb_data['Car_yeojohnson x Landsize_no_out'] = melb_data['Car_yeojohnson'] * melb_data['Landsize_no_out']
-'''
-
-# Concatenating the dummy variables with the main DataFrame
-melb_data = pd.concat([melb_data, dummies_Regionname, dummies_Type, dummies_Method], axis=1)
-
 # Dropping columns not used in the regression model
 excluded_columns = ['Address', 'Suburb', 'Regionname', 'Type', 'Method', 'Date', 'Propertycount']
 melb_data.drop(excluded_columns, axis=1, inplace=True)
