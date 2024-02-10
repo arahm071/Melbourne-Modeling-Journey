@@ -162,3 +162,7 @@ cython_debug/
 # Custom ignored files
 testing.py
 missing_eda.py
+Keeping track.docx
+
+# Custom ignored folders
+**/Tracking Updates/
