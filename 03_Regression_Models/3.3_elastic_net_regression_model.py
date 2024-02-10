@@ -33,8 +33,8 @@ excluded_columns = ['Address', 'Suburb', 'Regionname', 'Type', 'Method', 'Date',
 melb_data.drop(excluded_columns, axis=1, inplace=True)
 
 # Assign Independent and Dependent variables
-X = melb_data.drop('Price_log', axis=1)
-y = melb_data['Price_log']
+X = melb_data.drop('Price_boxcox', axis=1)
+y = melb_data['Price_boxcox']
 
 # Splitting the data into training and test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
