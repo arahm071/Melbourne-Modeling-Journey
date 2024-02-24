@@ -1,13 +1,21 @@
 # Standard library imports
-import os              # Provides a way of using operating system dependent functionality
+import sys
+import os  # Provides OS dependent functionality, such as file path manipulations
 
 # Third-party imports
-import pandas as pd              # Data manipulation and analysis library
-import numpy as np               # Scientific computing library
-import matplotlib.pyplot as plt  # Plotting library for creating static and interactive visualizations
-import seaborn as sns            # Data visualization library based on matplotlib
-from scipy import stats                         # Library for scientific and technical computing
-from sklearn.preprocessing import MinMaxScaler  # Feature scaling library
+import pandas as pd  # For data manipulation and analysis
+import numpy as np  # For scientific computing and array objects
+import matplotlib.pyplot as plt  # For creating static, animated, and interactive visualizations
+import seaborn as sns  # For data visualization based on matplotlib
+from scipy import stats  # For scientific and technical computing
+from sklearn.preprocessing import MinMaxScaler  # For feature scaling
+
+# Adding the parent directory of this script to sys.path for module importation
+parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, parent_dir)
+
+# Local application imports
+from utils import plot_utils  # Importing utility functions for plotting
 
 # * File Importation
 
@@ -20,111 +28,49 @@ data_path = os.path.join(script_dir, '..', '01_Data_Cleaning', '1_cleaned_melb_d
 # Load dataset containing cleaned Melbourne housing data
 melb_data = pd.read_csv(data_path)
 
-# Define columns for analysis
-melb_columns = ['Price', 'Distance', 'NewBed', 'Bathroom', 'Car', 'Landsize']
-
-# * Setup For Pre-Analysis Visualization
-
-def plot_skew(data, column_list, rows, cols, fig_x=15, fig_y=15):
-    """
-    Plots histograms for each specified column in a dataset to analyze skewness.
-
-    Parameters:
-    data (DataFrame): The dataset to plot.
-    column_list (list): List of column names to plot histograms for.
-    rows (int): Number of rows in the subplot grid.
-    cols (int): Number of columns in the subplot grid.
-    fig_x (int): Width of the figure.
-    fig_y (int): Height of the figure.
-    """
-    # Create a subplot grid
-    fig, axs = plt.subplots(nrows=rows, ncols=cols, figsize=(fig_x, fig_y))
-    rows_count, cols_count = 0, 0
-
-    # Iterate through the column list and plot histograms
-    for column_name in column_list:
-        sns.histplot(data=data, x=column_name, ax=axs[rows_count, cols_count])
-        axs[rows_count, cols_count].set_title(f'Distribution of {column_name}')
-        cols_count += 1
-
-        # Move to the next row if the current row is filled
-        if cols_count >= cols:
-            cols_count = 0
-            rows_count += 1
-
-    plt.tight_layout()  # Adjust layout to prevent overlap
-    plt.show()  # Display the plot
-
-def plot_outliers(data, column_list, rows, cols, fig_x=15, fig_y=15):
-    """
-    Plots boxplots for each specified column in a dataset to identify outliers.
-
-    Parameters:
-    data (DataFrame): The dataset to plot.
-    column_list (list): List of column names to plot boxplots for.
-    rows (int): Number of rows in the subplot grid.
-    cols (int): Number of columns in the subplot grid.
-    fig_x (int): Width of the figure.
-    fig_y (int): Height of the figure.
-    """
-    # Create a subplot grid
-    fig, axs = plt.subplots(nrows=rows, ncols=cols, figsize=(fig_x, fig_y))
-    rows_count, cols_count = 0, 0
-
-    # Iterate through the column list and plot boxplots
-    for column_name in column_list:
-        sns.boxplot(data=data, x=column_name, ax=axs[rows_count, cols_count])
-        axs[rows_count, cols_count].set_title(f'Boxplot of {column_name}')
-        cols_count += 1
-
-        # Move to the next row if the current row is filled
-        if cols_count >= cols:
-            cols_count = 0
-            rows_count += 1
-
-    plt.tight_layout()  # Adjust layout to prevent overlap
-    plt.show()  # Display the plot
-
 # * Pre-Analysis
 
-# Perform initial plotting of data
-plot_skew(data=melb_data, column_list=melb_columns, rows=2, cols=3)
-plot_outliers(data=melb_data, column_list=melb_columns, rows=2, cols=3)
+# Define quantitative and categorical columns for subsequent analysis
+quan_columns = ['Price', 'NewBed', 'Bathroom', 'Car', 'Distance', 'Landsize']
+cat_columns = ['Postcode', 'Suburb', 'Regionname', 'CouncilArea', 'Type', 'SellerG', 'Method', 'Year', 'Month']
 
-# Print skewness for selected variables from the melb_data dataframe
-print(melb_data[melb_columns].skew())
+# Initial plotting to understand data distributions
+plot_utils.plot_hist(data=melb_data, column_list=quan_columns, rows=2, cols=3)
+plot_utils.plot_qq(data=melb_data, column_list=quan_columns, rows=2, cols=3)
+plot_utils.plot_box(data=melb_data, column_list=quan_columns, rows=2, cols=3)
+plot_utils.plot_box(data=melb_data, column_list=cat_columns, price=True, rows=3, cols=3)
 
-# Generating pairplot for selected variables to visualize distributions and relationships
-sns.pairplot(data=melb_data[melb_columns])
+# Assess skewness of quantitative variables
+print(melb_data[quan_columns].skew())
+
+# Visualize pair-wise relationships to identify potential correlations and trends
+sns.pairplot(data=melb_data[quan_columns])
 plt.show()  # Display the pairplot
 
-# Compute and display correlation matrix for the numerical variables in the dataset
-correlation_matrix = melb_data[melb_columns].corr()
+# Display correlation matrix to assess linear relationships between variables
+correlation_matrix = melb_data[quan_columns].corr()
 sns.heatmap(correlation_matrix, annot=True)
 plt.title("Correlation Matrix")
 plt.show()
 
-#Descriptive statistics of melb_data
+# Display descriptive statistics to summarize central tendency, dispersion, and shape
 print(melb_data.describe())
 
-# * Data Transformation Process
+# * Feature Engineering
+# Copy the DataFrame to apply transformations without altering the original data
+melb_fe = melb_data.copy()
 
-# Identify and handle outliers for 'Landsize' column
-q1 = melb_data['Landsize'].quantile(0.25)
-q3 = melb_data['Landsize'].quantile(0.75)
-IQR = q3 - q1
-upper = q3 + (1.5 * IQR)
-lower = q1 - (1.5 * IQR)
-transformed_df = melb_data[(melb_data['Landsize'] >= lower) & (melb_data['Landsize'] <= upper)].copy()
-
-# Creating an indicator variable for properties with no land size listed
-transformed_df['Landsize_Indicator'] = np.where(transformed_df['Landsize'] == 0, 1, 0)
-
-# Creating dummy variables for categorical columns
-# ! dummies_Suburb = pd.get_dummies(transformed_df['Suburb'], drop_first=True, dtype=int)
-dummies_Regionname = pd.get_dummies(transformed_df['Regionname'], drop_first=True, dtype=int)
-dummies_Type = pd.get_dummies(transformed_df['Type'], drop_first=True, dtype=int)
-dummies_Method = pd.get_dummies(transformed_df['Method'], drop_first=True, dtype=int)
+# Creating dummy variables for categorical features
+# Note: 'drop_first=True' avoids dummy variable trap by removing the first level
+dummies_Postcode = pd.get_dummies(melb_fe['Postcode'], drop_first=True, dtype=int)
+dummies_Suburb = pd.get_dummies(melb_fe['Suburb'], drop_first=True, dtype=int)
+dummies_SellerG = pd.get_dummies(melb_fe['SellerG'], drop_first=True, dtype=int)
+dummies_Regionname = pd.get_dummies(melb_fe['Regionname'], drop_first=True, dtype=int)
+dummies_CouncilArea = pd.get_dummies(melb_fe['CouncilArea'], drop_first=True, dtype=int)
+dummies_Type = pd.get_dummies(melb_fe['Type'], drop_first=True, dtype=int)
+dummies_Method = pd.get_dummies(melb_fe['Method'], drop_first=True, dtype=int)
+dummies_Year = pd.get_dummies(melb_fe['Year'], drop_first=True, dtype=int)
+dummies_Month = pd.get_dummies(melb_fe['Month'], drop_first=True, dtype=int)
 
 # ! Uncomment the following block if you want to use grouped suburb categories
 '''
@@ -134,29 +80,34 @@ Grouped_Suburb = melb_data['Suburb'].apply(lambda x: x if x in top_suburbs else 
 dummies_Grouped_Suburb = pd.get_dummies(Grouped_Suburb, drop_first=True, dtype=int)
 '''
 
-# Concatenating the dummy variables with the main DataFrame
-transformed_df = pd.concat([transformed_df, dummies_Regionname, dummies_Type, dummies_Method], axis=1)
+# Concatenate dummy variables with the main DataFrame, dropping original categorical columns
+melb_fe = pd.concat([melb_fe, dummies_Suburb, dummies_SellerG, dummies_Postcode, dummies_Regionname, dummies_CouncilArea, dummies_Type, dummies_Method, dummies_Year, dummies_Month], axis=1)  # Concatenating along columns
+excluded_columns = ['Address', 'Postcode', 'Suburb', 'Regionname', 'CouncilArea', 'Type', 
+                    'SellerG', 'Method', 'Date', 'Year', 'Month', 'BuildingArea'] # List columns to drop
+melb_fe.drop(excluded_columns, axis=1, inplace=True)
 
 # Construct the full file path
-output_file_path_1 = os.path.join(script_dir, '2_untransformed_melb_data.csv')
+# ! output_file_path_1 = os.path.join(script_dir, '2_untransformed_melb_data.csv')
 
 # Export transformed data to a new CSV file
-transformed_df.to_csv(output_file_path_1, index=False)
+# ! melb_fe.to_csv(output_file_path_1, index=False)
+
+# TODO: Polynomial Features
 
 # Applying transformations to reduce skewness and normalize distributions
 # Box-Cox transformation for 'Price' to address skewness
-transformed_df['Price'], fitted_lambda = stats.boxcox(transformed_df['Price'])
+melb_fe['Price'], fitted_lambda = stats.boxcox(melb_fe['Price'])
 
 # Yeo-Johnson transformation for 'Distance', 'NewBed', and 'Car' to normalize data
-transformed_df['Distance'], fitted_lambda = stats.yeojohnson(transformed_df['Distance'])
-transformed_df['NewBed'], fitted_lambda = stats.yeojohnson(transformed_df['NewBed'])
-transformed_df['Car'], fitted_lambda = stats.yeojohnson(transformed_df['Car'])
+melb_fe['Distance'], fitted_lambda = stats.yeojohnson(melb_fe['Distance'])
+melb_fe['NewBed'], fitted_lambda = stats.yeojohnson(melb_fe['NewBed'])
+melb_fe['Car'], fitted_lambda = stats.yeojohnson(melb_fe['Car'])
 
 # Box-Cox transformation for 'Bathroom' to normalize data
-transformed_df['Bathroom'], fitted_lambda = stats.boxcox(transformed_df['Bathroom'])
+melb_fe['Bathroom'], fitted_lambda = stats.boxcox(melb_fe['Bathroom'])
 
 # Renaming columns to reflect the type of transformations applied
-transformed_df.rename(columns={
+melb_fe.rename(columns={
     "Price": "Price_boxcox", 
     "Distance": "Distance_yeojohnson",
     "NewBed": "NewBed_yeojohnson",
@@ -169,34 +120,59 @@ transformed_df.rename(columns={
 scaler = MinMaxScaler()
 
 # Fit the scaler to the data and transform the data
-transformed_df['Distance_yeojohnson'] = scaler.fit_transform(transformed_df[['Distance_yeojohnson']])
-transformed_df['Landsize_no_out'] = scaler.fit_transform(transformed_df[['Landsize_no_out']])
+melb_fe['Distance_yeojohnson'] = scaler.fit_transform(melb_fe[['Distance_yeojohnson']])
+melb_fe['Landsize_no_out'] = scaler.fit_transform(melb_fe[['Landsize_no_out']])
+
+# TODO: Interaction terms
 
 # Redefine columns for the transformed data
-melb_transformed_columns = ['Price_boxcox', 'Distance_yeojohnson', 'NewBed_yeojohnson', 'Bathroom_boxcox', 'Car_yeojohnson', 'Landsize_no_out']
+transformed_quan = ['Price_boxcox', 'Distance_yeojohnson', 'NewBed_yeojohnson', 'Bathroom_boxcox', 'Car_yeojohnson', 'Landsize_no_out']
 
-# * Post-Analysis
+# * Post-Feature Engineering Analysis
 
-# Plot histograms and boxplots for the transformed data
-plot_skew(data=transformed_df, column_list=melb_transformed_columns, rows=2, cols=3)
-plot_outliers(data=transformed_df, column_list=melb_transformed_columns, rows=2, cols=3)
+# Re-plot histograms, Q-Q plots, and boxplots for the transformed dataset to assess improvements
+plot_utils.plot_hist(data=melb_fe, column_list=transformed_quan, rows=2, cols=3)
+plot_utils.plot_qq(data=melb_fe, column_list=transformed_quan, rows=2, cols=3)
+plot_utils.plot_box(data=melb_fe, column_list=transformed_quan, rows=2, cols=3)
 
-# Print skewness for selected variables from the transformed dataframe
-print(transformed_df[melb_transformed_columns].skew())
+# Assess skewness after transformations
+print(melb_fe[transformed_quan].skew())
 
-# Compute and display correlation matrix for the transformed data
-correlation_matrix_transformed = transformed_df[melb_transformed_columns].corr()
+# Display correlation matrix for the transformed dataset
+correlation_matrix_transformed = melb_fe[transformed_quan].corr()
 sns.heatmap(correlation_matrix_transformed, annot=True)
 plt.title("Correlation Matrix After Transformations")
 plt.show()
 
 # Generating pairplot for the transformed variables to visualize distributions, relationships,
 # and conduct a basic linearity check (excluding categorical variables)
-sns.pairplot(data=transformed_df[melb_transformed_columns])
+sns.pairplot(data=melb_fe[transformed_quan])
 plt.show()  # Display the pairplot
 
-#Descriptive statistics of transformed_df
-print(transformed_df.describe())
+# Generate descriptive statistics for the transformed dataset
+print(melb_fe.describe())
+
+# * Feature Selection and Optimization
+
+# TODO: Pre Feature Selection VIF
+
+# ! Detecting Multicollinearity with VIF (For high condition number)
+'''
+corr_matrix = X.corr()
+sns.heatmap(corr_matrix, annot=True)
+vif_data = pd.DataFrame()
+vif_data['feature'] = X.columns
+vif_data["VIF"] = [variance_inflation_factor(X.values, i) for i in range(len(X.columns))]
+print(vif_data)  # vif_data shows all VIFs are below the common threshold, so multicollinearity is not a significant concern
+'''
+
+# TODO: combining correlated variables into a single composite variable
+
+# TODO: Remove High VIF
+
+# TODO: Feature Selection
+
+# TODO: Post Feature Selection VIF
 
 # * File Exportation
 
@@ -204,4 +180,4 @@ print(transformed_df.describe())
 output_file_path_2 = os.path.join(script_dir, '2_transformed_melb_data.csv')
 
 # Export transformed data to a new CSV file
-transformed_df.to_csv(output_file_path_2, index=False)
+melb_fe.to_csv(output_file_path_2, index=False)
