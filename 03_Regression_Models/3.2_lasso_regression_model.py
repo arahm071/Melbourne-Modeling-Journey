@@ -21,16 +21,12 @@ from statsmodels.tools.tools import add_constant                                
 script_dir = os.path.abspath(os.path.dirname(__file__))
 
 # Build the absolute path to the data file
-data_path = os.path.join(script_dir, '..', '02_Exploratory_Data_Analysis', '2_transformed_melb_data.csv')
+data_path = os.path.join(script_dir, '..', '02_Exploratory_Data_Analysis', '2.5_transformed_melb_data.csv')
 
 # Load the transformed Melbourne housing dataset
 melb_data = pd.read_csv(data_path)
 
 # * Prepare Data For Model Fitting
-
-# Dropping columns not used in the regression model
-excluded_columns = ['Address', 'Suburb', 'Regionname', 'Type', 'Method', 'Date', 'Propertycount']
-melb_data.drop(excluded_columns, axis=1, inplace=True)
 
 # Assign Independent and Dependent variables
 X = melb_data.drop('Price_boxcox', axis=1)
@@ -128,9 +124,9 @@ plt.show()
 feature_importance = pd.DataFrame(model.coef_, index=X.columns, columns=['importance'])
 print(feature_importance.sort_values(by='importance', ascending=False).to_string())
 
-# Performing Cross-validation
+'''# Performing Cross-validation
 scores = cross_val_score(model, X, y, cv=5)
-print("Cross-validated scores:", scores)
+print("Cross-validated scores:", scores)'''
 
 # Diagnostic Plots (Q-Q Plot)
 stats.probplot(residuals, dist="norm", plot=plt)

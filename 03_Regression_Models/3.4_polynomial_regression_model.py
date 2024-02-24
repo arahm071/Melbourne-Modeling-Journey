@@ -24,16 +24,12 @@ from statsmodels.tools.tools import add_constant                                
 script_dir = os.path.abspath(os.path.dirname(__file__))
 
 # Build the absolute path to the data file
-data_path = os.path.join(script_dir, '..', '02_Exploratory_Data_Analysis', '2_transformed_melb_data.csv')
+data_path = os.path.join(script_dir, '..', '02_Exploratory_Data_Analysis', '2.5_transformed_melb_data.csv')
 
 # Load the transformed Melbourne housing dataset
 melb_data = pd.read_csv(data_path)
 
 # * Prepare Data For Model Fitting
-
-# Dropping columns not used in the regression model
-excluded_columns = ['Address', 'Suburb', 'Regionname', 'Type', 'Method', 'Date', 'Propertycount']
-melb_data.drop(excluded_columns, axis=1, inplace=True)
 
 # Assign Independent and Dependent variables
 X = melb_data.drop('Price_boxcox', axis=1)
@@ -49,7 +45,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random
 pipeline = make_pipeline(PolynomialFeatures(), LinearRegression())
 
 # Defining the parameter grid: test degrees 1 through 5
-param_grid = {'polynomialfeatures__degree': [1, 2, 3, 4, 5]}
+param_grid = {'polynomialfeatures__degree': [1, 2, 3]}
 
 # Setting up the GridSearchCV object
 grid_search = GridSearchCV(pipeline, param_grid, cv=5, scoring='neg_mean_squared_error')

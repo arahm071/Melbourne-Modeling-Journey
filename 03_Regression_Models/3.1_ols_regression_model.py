@@ -14,14 +14,10 @@ from statsmodels.stats.outliers_influence import OLSInfluence
 script_dir = os.path.abspath(os.path.dirname(__file__))
 
 # Build the absolute path to the data file
-data_path = os.path.join(script_dir, '..', '02_Exploratory_Data_Analysis', '2_transformed_melb_data.csv')
+data_path = os.path.join(script_dir, '..', '02_Exploratory_Data_Analysis', '2.5_transformed_melb_data.csv')
 
 # Load the transformed Melbourne housing dataset
 melb_data = pd.read_csv(data_path)
-
-# Dropping columns not used in the regression model
-excluded_columns = ['Address', 'Suburb', 'Regionname', 'Type', 'Method', 'Date', 'Propertycount']
-melb_data.drop(excluded_columns, axis=1, inplace=True)
 
 # Preparing the features (X) and target variable (y) for the regression model
 X = melb_data.drop('Price_boxcox', axis=1)
@@ -67,13 +63,3 @@ plt.figure()
 sm.graphics.influence_plot(model, criterion="cooks")
 plt.title('Residuals vs Leverage')
 plt.show()
-
-# ! Detecting Multicollinearity with VIF (For high condition number)
-'''
-corr_matrix = X.corr()
-sns.heatmap(corr_matrix, annot=True)
-vif_data = pd.DataFrame()
-vif_data['feature'] = X.columns
-vif_data["VIF"] = [variance_inflation_factor(X.values, i) for i in range(len(X.columns))]
-print(vif_data)  # vif_data shows all VIFs are below the common threshold, so multicollinearity is not a significant concern
-'''

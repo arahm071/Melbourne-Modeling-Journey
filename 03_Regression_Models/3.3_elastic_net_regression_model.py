@@ -21,16 +21,12 @@ from statsmodels.tools.tools import add_constant                                
 script_dir = os.path.abspath(os.path.dirname(__file__))
 
 # Build the absolute path to the data file
-data_path = os.path.join(script_dir, '..', '02_Exploratory_Data_Analysis', '2_transformed_melb_data.csv')
+data_path = os.path.join(script_dir, '..', '02_Exploratory_Data_Analysis', '2.5_transformed_melb_data.csv')
 
 # Load the transformed Melbourne housing dataset
 melb_data = pd.read_csv(data_path)
 
 # * Prepare Data For Model Fitting
-
-# Dropping columns not used in the regression model
-excluded_columns = ['Address', 'Suburb', 'Regionname', 'Type', 'Method', 'Date', 'Propertycount']
-melb_data.drop(excluded_columns, axis=1, inplace=True)
 
 # Assign Independent and Dependent variables
 X = melb_data.drop('Price_boxcox', axis=1)
@@ -50,7 +46,7 @@ elastic_net_cv = ElasticNetCV(alphas=np.arange(0.00001, 0.0001, 0.0001),  # Simp
                               l1_ratio=np.arange(0.05, 1, 0.05),  # Simplified for testing
                               cv=cv, n_jobs=-1, max_iter=1000, tol=0.001, verbose=1)  # Added verbosity
 
-# Fit the model
+# Fit the model 
 elastic_net_cv.fit(X_train, y_train)
 
 # Best alpha value and l1_ratio
@@ -131,9 +127,9 @@ plt.show()
 feature_importance = pd.DataFrame(model.coef_, index=X.columns, columns=['importance'])
 print(feature_importance.sort_values(by='importance', ascending=False).to_string())
 
-# Performing Cross-validation
+'''# Performing Cross-validation
 scores = cross_val_score(model, X, y, cv=5)
-print("Cross-validated scores:", scores)
+print("Cross-validated scores:", scores)'''
 
 # Diagnostic Plots (Q-Q Plot)
 stats.probplot(residuals, dist="norm", plot=plt)
