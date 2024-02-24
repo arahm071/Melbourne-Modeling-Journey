@@ -160,9 +160,11 @@ cython_debug/
 #.idea/
 
 # Custom ignored files
-testing.py
-missing_eda.py
+**/skewness_test.py
+**/missing_eda.py
 Keeping track.docx
+**/3.5_GAM.py
 
 # Custom ignored folders
 **/Tracking Updates/
+documentation/
