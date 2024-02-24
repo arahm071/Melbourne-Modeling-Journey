@@ -164,6 +164,9 @@ cython_debug/
 **/missing_eda.py
 Keeping track.docx
 **/3.5_GAM.py
+**/0_melb_data.xlsx
+**/0_melb_data.zip
+**/melb_data.csv
 
 # Custom ignored folders
 **/Tracking Updates/
