@@ -24,6 +24,10 @@ def concat_dummies(df, cat_list):
     for cat in cat_list:
         dummy_var = pd.get_dummies(df[cat], drop_first=True, dtype=int)
         
+        # Add a custom suffix to each dummy column
+        suffix = cat[:4]
+        dummy_var.columns = [f'{col}_{suffix}' for col in dummy_var.columns]
+        
         # Concatenate the dummy variables to the copy of the DataFrame
         dummy_df = pd.concat([dummy_df, dummy_var], axis=1)
 
