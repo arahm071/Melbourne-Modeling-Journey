@@ -686,7 +686,7 @@ Balwyn North,30 Abbott St,5,h,1550000,VB,Fletchers,28/05/2016,9.2,3104,7,2,0,942
 Balwyn North,15 Ellendale St,3,h,1038000,S,Christopher,28/05/2016,9.2,3104,3,2,1,207,144,2003,Boroondara,-37.7893,145.092,Southern Metropolitan,7809
 Balwyn North,15 Maughan Pde,5,h,1660000,PI,hockingstuart,28/05/2016,9.2,3104,4,3,2,737,193,1950,Boroondara,-37.7975,145.0961,Southern Metropolitan,7809
 Balwyn North,61 Ray Dr,3,h,1260000,PI,hockingstuart,28/05/2016,9.2,3104,3,2,2,458,,1997,Boroondara,-37.7908,145.0991,Southern Metropolitan,7809
-Balwyn North,9 Gildan St,3,h,2000000,VB,Kay,28/08/2016,9.2,3104,3,1,2,75100,,,Boroondara,-37.8002,145.07,Southern Metropolitan,7809
+Balwyn North,9 Gildan St,3,h,2000000,VB,Kay,28/08/2016,9.2,3104,3,1,2,700,,,Boroondara,-37.8002,145.07,Southern Metropolitan,7809
 Balwyn North,10 Hood St,4,h,2155000,S,Jellis,28/08/2016,9.2,3104,4,2,3,620,,,Boroondara,-37.7985,145.0707,Southern Metropolitan,7809
 Balwyn North,3/8 Severn St,3,h,1225000,VB,Fletchers,28/08/2016,9.2,3104,3,2,2,282,,,Boroondara,-37.7936,145.0697,Southern Metropolitan,7809
 Balwyn North,40 Stephens St,4,h,2150000,PI,Noel,28/08/2016,9.2,3104,4,2,2,730,,1960,Boroondara,-37.7993,145.0869,Southern Metropolitan,7809
@@ -1367,7 +1367,7 @@ Brunswick,4 Bell St,4,h,1790000,S,Ray,27/06/2016,5.2,3056,3,1,1,416,129,1920,Mor
 Brunswick,2/123 Brunswick Rd,3,t,640000,PI,Walshe,27/06/2016,5.2,3056,3,2,1,110,118,2000,Moreland,-37.7776,144.9691,Northern Metropolitan,11918
 Brunswick,4 Bryant St,4,h,820000,VB,Nelson,27/06/2016,5.2,3056,3,1,0,416,,,Moreland,-37.763,144.9598,Northern Metropolitan,11918
 Brunswick,36 Charles St,4,h,1875000,S,Jellis,27/06/2016,5.2,3056,4,2,2,657,207,1958,Moreland,-37.7725,144.964,Northern Metropolitan,11918
-Brunswick,7 Garnet St,3,h,1053000,S,Ray,27/06/2016,5.2,3056,3,1,1,343,1041,1925,Moreland,-37.7589,144.9529,Northern Metropolitan,11918
+Brunswick,7 Garnet St,3,h,1053000,S,Ray,27/06/2016,5.2,3056,3,1,1,343,,1925,Moreland,-37.7589,144.9529,Northern Metropolitan,11918
 Brunswick,11 William St,3,t,705000,PI,Nelson,27/06/2016,5.2,3056,2,1,1,55,111,2012,Moreland,-37.7611,144.9622,Northern Metropolitan,11918
 Brunswick,10/150 Brunswick Rd,1,u,240000,PI,Hodges,27/11/2016,5.2,3056,1,1,1,0,,,Moreland,-37.7776,144.9633,Northern Metropolitan,11918
 Brunswick,329 Brunswick Rd,4,h,1175000,PI,Jellis,27/11/2016,5.2,3056,4,1,2,319,1,,Moreland,-37.7763,144.9549,Northern Metropolitan,11918
@@ -1483,7 +1483,7 @@ Bulleen,11 Carrathool St,3,h,1400000,S,Barry,10/12/16,11.8,3105,3,1,3,770,,,Mann
 Bulleen,135 Manningham Rd,4,h,1085000,PI,Barry,10/12/16,11.8,3105,4,2,1,1124,225,1960,Manningham,-37.7679,145.0958,Eastern Metropolitan,4480
 Bulleen,24 Robert St,4,h,1300000,SP,Jellis,10/12/16,11.8,3105,4,3,1,604,,,Manningham,-37.7621,145.086,Eastern Metropolitan,4480
 Bulleen,1/15 Estelle St,3,u,787000,S,Barry,11/02/17,11.8,3105,3,1,2,306,100,1985,Manningham,-37.7792,145.0903,Eastern Metropolitan,4480
-Bulleen,19 Warringal St,4,h,1280000,S,Barry,11/03/17,11.8,3105,4,1,2,732,6791,,Manningham,-37.7615,145.0897,Eastern Metropolitan,4480
+Bulleen,19 Warringal St,4,h,1280000,S,Barry,11/03/17,11.8,3105,4,1,2,732,732,,Manningham,-37.7615,145.0897,Eastern Metropolitan,4480
 Bulleen,14 Kandanga Gr,3,h,1075000,S,Jellis,12/11/16,11.8,3105,3,1,1,604,96,1960,Manningham,-37.7711,145.0928,Eastern Metropolitan,4480
 Bulleen,153 Thompsons Rd,2,h,890000,S,Fletchers,12/11/16,11.8,3105,2,1,2,559,,,Manningham,-37.7739,145.094,Eastern Metropolitan,4480
 Bulleen,38 Rocklea Rd,4,h,1320000,PI,Jellis,14/05/2016,11.8,3105,4,3,2,411,,1970,Manningham,-37.7698,145.083,Eastern Metropolitan,4480
@@ -1587,7 +1587,7 @@ Camberwell,3/220 Warrigal Rd,2,u,435000,SP,LITTLE,12/11/16,7.8,3124,2,1,1,896,77
 Camberwell,2/3 Tyrone St,2,h,620000,VB,Jellis,13/08/2016,7.8,3124,2,1,1,122,,1960,Boroondara,-37.8439,145.0718,Southern Metropolitan,8920
 Camberwell,603 Burke Rd,5,h,2000000,VB,Marshall,14/05/2016,7.8,3124,5,3,2,801,,1920,Boroondara,-37.84,145.0548,Southern Metropolitan,8920
 Camberwell,3/5 Holly St,3,u,591000,PI,Jellis,14/05/2016,7.8,3124,3,1,1,0,89,1960,Boroondara,-37.8255,145.0592,Southern Metropolitan,8920
-Camberwell,46 Athelstan Rd,5,h,2608000,S,Marshall,15/10/2016,7.8,3124,5,2,4,730,3112,1920,Boroondara,-37.8424,145.0639,Southern Metropolitan,8920
+Camberwell,46 Athelstan Rd,5,h,2608000,S,Marshall,15/10/2016,7.8,3124,5,2,4,730,,1920,Boroondara,-37.8424,145.0639,Southern Metropolitan,8920
 Camberwell,6 Gavan St,3,h,1780000,S,Fletchers,15/10/2016,7.8,3124,3,1,1,769,133,1930,Boroondara,-37.8482,145.0949,Southern Metropolitan,8920
 Camberwell,4 Ada St,3,h,2250000,S,O'Donoghues,16/04/2016,7.8,3124,3,2,2,656,225,2009,Boroondara,-37.841,145.0824,Southern Metropolitan,8920
 Camberwell,591 Camberwell Rd,2,h,895000,PI,O'Donoghues,16/04/2016,7.8,3124,2,1,1,424,95,1930,Boroondara,-37.8465,145.0743,Southern Metropolitan,8920
@@ -2233,7 +2233,6 @@ Elsternwick,5 Baxter St,3,h,1390000,PI,Biggin,15/10/2016,8.5,3185,3,1,2,463,102,
 Elsternwick,3/477 Kooyong Rd,3,t,1071000,S,Biggin,16/04/2016,8.5,3185,3,2,2,179,125,2000,Glen Eira,-37.8961,145.0125,Southern Metropolitan,4898
 Elsternwick,21 Liscard St,3,h,1800000,S,Biggin,16/04/2016,8.5,3185,3,2,2,492,181,1905,Glen Eira,-37.8789,145.0048,Southern Metropolitan,4898
 Elsternwick,2 Park St,3,h,2345000,S,Biggin,16/04/2016,8.5,3185,3,2,1,419,204,1908,Glen Eira,-37.8817,145.0126,Southern Metropolitan,4898
-Elsternwick,5/16 St Georges Rd,2,u,741000,S,Biggin,16/04/2016,8.5,3185,3,1,1,0,1561,1966,Glen Eira,-37.8829,145.0033,Southern Metropolitan,4898
 Elsternwick,12/66 Riddell Pde,2,u,626000,S,Gary,17/09/2016,8.5,3185,2,1,1,1764,100,1930,Glen Eira,-37.8889,145.0043,Southern Metropolitan,4898
 Elsternwick,1 Bent St,3,h,2160000,S,Biggin,18/03/2017,8.5,3185,3,1,1,590,185,,Glen Eira,-37.8807,145.0005,Southern Metropolitan,4898
 Elsternwick,15 Murray St,4,h,3000000,S,Biggin,18/03/2017,8.5,3185,4,2,2,661,204,,Glen Eira,-37.8844,145.0117,Southern Metropolitan,4898
@@ -2559,7 +2558,7 @@ Fitzroy North,470 Brunswick St,2,h,860000,S,Woodards,3/09/16,3.5,3068,2,1,0,104,
 Fitzroy North,50 Freeman St,2,h,870000,S,Nelson,3/09/16,3.5,3068,2,1,0,107,64,1910,Yarra,-37.7898,144.9794,Northern Metropolitan,6244
 Fitzroy North,76 Newry St,2,h,1116000,S,Nelson,3/09/16,3.5,3068,3,1,0,152,,,Yarra,-37.791,144.9809,Northern Metropolitan,6244
 Fitzroy North,2 Pilkington St,4,h,1450000,VB,Nelson,3/09/16,3.5,3068,4,2,1,266,175,1950,Yarra,-37.7797,144.9861,Northern Metropolitan,6244
-Fitzroy North,186 Queens Pde,2,t,930000,S,Nelson,3/09/16,3.5,3068,2,3,0,2778,3558,,Yarra,-37.7903,144.9859,Northern Metropolitan,6244
+Fitzroy North,186 Queens Pde,2,t,930000,S,Nelson,3/09/16,3.5,3068,2,3,0,2778,,235,Yarra,-37.7903,144.9859,Northern Metropolitan,6244
 Fitzroy North,129/4 Bik La,2,u,700000,SP,Collins,4/03/17,3.5,3068,2,2,2,4296,,2011,Yarra,-37.7846,144.9785,Northern Metropolitan,6244
 Fitzroy North,276 McKean St,3,h,2170000,S,Nelson,4/03/17,3.5,3068,3,2,1,177,,,Yarra,-37.7851,144.9934,Northern Metropolitan,6244
 Fitzroy North,7/14 Rae St,1,u,358500,SP,Jellis,4/03/17,3.5,3068,1,1,1,0,40,1975,Yarra,-37.7925,144.9786,Northern Metropolitan,6244
@@ -2829,7 +2828,7 @@ Glen Iris,23 Flowerdale Rd,5,h,3860000,S,Marshall,19/11/2016,9.2,3146,5,4,2,830,
 Glen Iris,31 Gardiner Pde,4,h,2625000,PI,Marshall,19/11/2016,9.2,3146,4,3,2,840,326,1930,Boroondara,-37.8538,145.0641,Southern Metropolitan,10412
 Glen Iris,5/1679 Malvern Rd,2,u,856500,S,Marshall,19/11/2016,9.2,3146,2,1,1,0,,1960,Stonnington,-37.8566,145.0553,Southern Metropolitan,10412
 Glen Iris,2b York Rd,5,h,1650000,PI,Noel,22/05/2016,9.2,3146,5,2,2,400,,,Stonnington,-37.8572,145.0555,Southern Metropolitan,10412
-Glen Iris,1/58 Edgar St N,2,t,600000,VB,Gary,22/08/2016,9.2,3146,2,1,1,0,1143,,Stonnington,-37.8506,145.0465,Southern Metropolitan,10412
+Glen Iris,1/58 Edgar St N,2,t,600000,VB,Gary,22/08/2016,9.2,3146,2,1,1,0,,,Stonnington,-37.8506,145.0465,Southern Metropolitan,10412
 Glen Iris,2/13 Estella St,2,u,690000,S,O'Donoghues,24/09/2016,9.2,3146,2,1,2,166,,,Boroondara,-37.863,145.0631,Southern Metropolitan,10412
 Glen Iris,7 Hope St,3,t,1200000,VB,O'Donoghues,24/09/2016,9.2,3146,3,2,2,541,,,Stonnington,-37.8628,145.0486,Southern Metropolitan,10412
 Glen Iris,15 Howitt St,4,h,3010000,S,Kay,24/09/2016,9.2,3146,3,3,2,677,,1910,Boroondara,-37.8476,145.0554,Southern Metropolitan,10412
@@ -3639,7 +3638,7 @@ Kew,2A Churchill St,3,h,1476000,S,Jellis,18/03/2017,5.6,3101,3,2,2,288,203,1997,
 Kew,30 College Pde,4,h,2590000,S,Marshall,18/03/2017,5.6,3101,4,2,2,660,215,1928,Boroondara,-37.8124,145.0361,Southern Metropolitan,10331
 Kew,176 Cotham Rd,4,h,2625000,PI,Marshall,18/03/2017,5.6,3101,4,2,2,717,225,1890,Boroondara,-37.8083,145.0418,Southern Metropolitan,10331
 Kew,45 Stevenson St,4,h,2265000,S,Jellis,18/03/2017,5.6,3101,4,1,1,650,242,1930,Boroondara,-37.8098,145.02200000000005,Southern Metropolitan,10331
-Kew,24 Fitzwilliam St,5,h,1975000,S,Kay,18/06/2016,5.6,3101,3,2,1,531,1022,1890,Boroondara,-37.813,145.0411,Southern Metropolitan,10331
+Kew,24 Fitzwilliam St,5,h,1975000,S,Kay,18/06/2016,5.6,3101,3,2,1,531,181,1890,Boroondara,-37.813,145.0411,Southern Metropolitan,10331
 Kew,37 Heather Gr,4,h,2075000,S,Kay,18/06/2016,5.6,3101,4,2,2,764,,,Boroondara,-37.8046,145.0595,Southern Metropolitan,10331
 Kew,176 Peel St,5,h,2550000,PI,Marshall,18/06/2016,5.6,3101,5,4,2,597,342,2016,Boroondara,-37.7937,145.0353,Southern Metropolitan,10331
 Kew,52 Argyle Rd,4,h,2240000,S,Jellis,19/11/2016,5.6,3101,4,2,2,820,,,Boroondara,-37.804,145.0553,Southern Metropolitan,10331
@@ -5193,7 +5192,7 @@ Reservoir,4/32 Crookston Rd,2,u,440000,SP,Barry,22/08/2016,11.2,3073,2,1,1,153,8
 Reservoir,30 Kinsale St,3,h,851500,S,Nelson,22/08/2016,11.2,3073,3,1,1,0,,1930,Darebin,-37.7217,144.9954,Northern Metropolitan,21650
 Reservoir,129 Spring St,2,h,623500,S,Nelson,22/08/2016,11.2,3073,2,1,0,452,,,Darebin,-37.7271,145.0009,Northern Metropolitan,21650
 Reservoir,52 Wilson Bvd,4,h,830000,PI,Ray,22/08/2016,11.2,3073,4,1,4,791,,,Darebin,-37.7001,144.9936,Northern Metropolitan,21650
-Reservoir,14 Beenak St,3,h,572000,S,Ray,23/04/2016,11.2,3073,3,1,2,41400,,,Darebin,-37.7104,145.0257,Northern Metropolitan,21650
+Reservoir,14 Beenak St,3,h,572000,S,Ray,23/04/2016,11.2,3073,3,1,2,532,,,Darebin,-37.7104,145.0257,Northern Metropolitan,21650
 Reservoir,1/15 Delaware St,3,h,600000,S,Ray,23/04/2016,11.2,3073,3,2,2,0,,,Darebin,-37.7208,145.0148,Northern Metropolitan,21650
 Reservoir,2/15 Delaware St,3,h,450000,VB,Ray,23/04/2016,11.2,3073,2,2,2,185,,,Darebin,-37.7211,145.0147,Northern Metropolitan,21650
 Reservoir,2/2 Elsey Rd,2,u,525000,S,Harcourts,23/04/2016,11.2,3073,3,1,2,284,,2014,Darebin,-37.705,145.0152,Northern Metropolitan,21650
@@ -10503,7 +10502,7 @@ Seaford,12 Riviera St,4,h,795000,S,Veitch,27/05/2017,35.4,3198,4,2,2,631,158,196
 Seddon,1 Bute St,3,h,1315000,PI,Biggin,27/05/2017,5.1,3011,4,3,2,122,,1950,Maribyrnong,-37.80401,144.89519,Western Metropolitan,2417
 Seddon,57 Charles St,2,h,830000,VB,Village,27/05/2017,5.1,3011,2,1,1,152,91,1910,Maribyrnong,-37.80697,144.8928,Western Metropolitan,2417
 Seddon,19 Station Rd,2,h,940000,S,Jellis,27/05/2017,5.1,3011,2,1,0,207,94,1910,Maribyrnong,-37.8071,144.88912,Western Metropolitan,2417
-Silvan,16 Eleanor Dr,3,h,1085000,S,Harcourts,27/05/2017,34.6,3795,3,2,2,76000,,,Yarra Ranges,-37.84739,145.47052,Eastern Victoria,457
+Silvan,16 Eleanor Dr,3,h,1085000,S,Harcourts,27/05/2017,34.6,3795,3,2,2,76000,737,,Yarra Ranges,-37.84739,145.47052,Eastern Victoria,457
 South Kingsville,41 Kernot St,3,h,835000,S,Biggin,27/05/2017,6.2,3015,3,1,1,297,,,Hobsons Bay,-37.82984,144.873,Western Metropolitan,984
 South Melbourne,67 Dow St,1,h,807500,S,Greg,27/05/2017,1.9,3205,1,1,0,74,,1900,Port Phillip,-37.83627,144.9605,Southern Metropolitan,5943
 South Melbourne,8 Ferrars Pl,4,h,4100000,S,Greg,27/05/2017,1.9,3205,4,2,1,403,,,Port Phillip,-37.83737,144.95799,Southern Metropolitan,5943
@@ -11019,7 +11018,7 @@ Fawkner,10 Baird St,5,h,900000,VB,hockingstuart,12/08/17,13.1,3060,5,3,4,663,,,M
 Fawkner,6 Brooks St,3,h,700000,VB,hockingstuart,12/08/17,13.1,3060,3,1,4,658,,,Moreland,-37.70711,144.97318,Northern Metropolitan,5070
 Fawkner,50 Major Rd,1,h,515000,S,hockingstuart,12/08/17,13.1,3060,1,1,0,173,,,Moreland,-37.70745,144.97046,Northern Metropolitan,5070
 Ferntree Gully,11 Aitken Ct,3,h,904000,SP,LJ,12/08/17,24.8,3156,3,1,3,1014,,,Knox,-37.88472,145.26653000000005,Eastern Metropolitan,10788
-Fitzroy,389 Gore St,3,h,2700000,VB,Kay,12/08/17,2.1,3065,3,3,1,433014,,,Yarra,-37.79751,144.98309,Northern Metropolitan,5825
+Fitzroy,389 Gore St,3,h,2700000,VB,Kay,12/08/17,2.1,3065,3,3,1,102,,,Yarra,-37.79751,144.98309,Northern Metropolitan,5825
 Fitzroy,411/416 Gore St,3,u,1060000,PI,Jellis,12/08/17,2.1,3065,3,2,2,6367,,,Yarra,-37.7967,144.98363,Northern Metropolitan,5825
 Fitzroy,302/424 Gore St,1,u,545000,S,Jellis,12/08/17,2.1,3065,1,1,1,1730,60,2011,Yarra,-37.79636,144.98394,Northern Metropolitan,5825
 Fitzroy,122 Nicholson St,4,h,3200000,VB,Nelson,12/08/17,2.1,3065,4,4,0,225,,1862,Yarra,-37.80209,144.97443,Northern Metropolitan,5825
@@ -13244,7 +13243,7 @@ Mulgrave,9 Caledonia Cr,3,h,1105000,S,Ray,23/09/2017,18.8,3170,3,2,2,843,,,,-37.
 Mulgrave,5 Lola St,5,h,880000,PI,SN,23/09/2017,18.8,3170,5,3,2,654,,1960,,-37.92914,145.17372,South-Eastern Metropolitan,7113
 Mulgrave,25 Rupert Dr,3,h,840000,S,Ray,23/09/2017,18.8,3170,3,1,2,656,107,1972,,-37.93271,145.17792,South-Eastern Metropolitan,7113
 Murrumbeena,21 Reid St,3,h,1321188,SP,Woodards,23/09/2017,10.1,3163,3,1,1,586,200,1945,,-37.90584,145.0725,Southern Metropolitan,4442
-New Gisborne,71 Hamilton Rd,5,h,1355000,S,Raine,23/09/2017,48.1,3438,5,3,5,44500,44515,,Macedon Ranges,-37.45392,144.58864,Northern Victoria,849
+New Gisborne,71 Hamilton Rd,5,h,1355000,S,Raine,23/09/2017,48.1,3438,5,3,5,44500,812,,Macedon Ranges,-37.45392,144.58864,Northern Victoria,849
 Newport,32 Agg St,2,h,1130000,S,Williams,23/09/2017,6.2,3015,2,1,2,343,98,1980,,-37.84332,144.87718,Western Metropolitan,5498
 Newport,65 Speight St,3,h,950000,SP,Sweeney,23/09/2017,6.2,3015,3,1,1,344,,,,-37.84259,144.8749,Western Metropolitan,5498
 Niddrie,1 Cuthbert St,2,h,800000,S,Frank,23/09/2017,10.4,3042,2,1,2,352,83,1950,,-37.7361,144.88306,Western Metropolitan,2291
