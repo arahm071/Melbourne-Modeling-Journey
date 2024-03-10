@@ -172,4 +172,9 @@ Keeping track.docx
 
 # Custom ignored folders
 **/Tracking Updates/
+**/0_hidden/
+**/1_hidden/
+**/2_hidden/
+**/3_hidden/
+**/4_hidden/
 documentation/
