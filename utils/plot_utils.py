@@ -107,8 +107,13 @@ def plot_box(data, column_list, rows, cols, price=False, fig_x=15, fig_y=15):
         for column_name in column_list:
             sns.boxplot(data=data, x=column_name, y='Price', ax=axs[row_count, col_count])
             axs[row_count, col_count].set_title(f'Boxplot of Price vs. {column_name}')
+            
+            # Rotate x-axis labels if more than 12 unique values to prevent overlap.
+            if data[column_name].nunique() > 12 or column_name == 'Regionname':
+                axs[row_count, col_count].tick_params(axis='x', rotation=90)
+            
             col_count += 1  # Increment column index
-
+            
             # Move to the next row if the current row is filled
             if col_count >= cols:
                 col_count = 0  # Reset column index for new row
@@ -158,6 +163,10 @@ def plot_violin(data, column_list, rows, cols, fig_x=15, fig_y=15):
         # Set the title of the current plot
         axs[row_count, col_count].set_title(f'Violin Plot of Price vs. {column_name}')
         
+        # Rotate x-axis labels if more than 12 unique values to prevent overlap.
+        if data[column_name].nunique() > 12 or column_name == 'Regionname':
+            axs[row_count, col_count].tick_params(axis='x', rotation=90)
+        
         col_count += 1  # Move to the next column in the grid
 
         # Check if the current row is filled; move to the next row if so
@@ -167,3 +176,91 @@ def plot_violin(data, column_list, rows, cols, fig_x=15, fig_y=15):
 
     plt.tight_layout()  # Adjust subplot parameters to give specified padding
     plt.show()  # Display the completed grid of violin plots
+
+    
+def plot_bar(data, column_list, rows, cols, fig_x=15, fig_y=15):
+    """
+    Plots bar plots for each specified column in a dataset, optionally against a 'Price' column.
+
+    This function creates a grid of bar plots for each column specified in the column_list. If the price parameter
+    is set to True, each bar plot will compare the values of the column against the 'Price' column. This is useful
+    for analyzing the distribution and central tendency of data, as well as comparing different categories if 'Price'
+    is involved.
+
+    Parameters:
+    - data (DataFrame): The dataset containing the data to plot.
+    - column_list (list of str): List of column names for which bar plots will be created.
+    - rows (int): Number of rows in the subplot grid.
+    - cols (int): Number of columns in the subplot grid.
+    - price (bool, optional): Determines if bar plots should be plotted against a 'Price' column. Default is False.
+    - fig_x (int, optional): Width of the figure in inches. Default is 15.
+    - fig_y (int, optional): Height of the figure in inches. Default is 15.
+
+    Returns:
+    None
+    """
+    # Initialize the subplot grid with specified dimensions
+    fig, axs = plt.subplots(nrows=rows, ncols=cols, figsize=(fig_x, fig_y))
+    row_count, col_count = 0, 0  # Track the current row and column indices
+    
+    for column_name in column_list:
+        sns.barplot(data=data, x=column_name, y='Price', ax=axs[row_count, col_count])
+        axs[row_count, col_count].set_title(f'Barplot of Price vs. {column_name}')
+        
+        # Rotate x-axis labels if more than 12 unique values to prevent overlap.
+        if data[column_name].nunique() > 12 or column_name == 'Regionname':
+            axs[row_count, col_count].tick_params(axis='x', rotation=90)
+        
+        col_count += 1  # Increment column index
+
+        # Move to the next row if the current row is filled
+        if col_count >= cols:
+            col_count = 0  # Reset column index for new row
+            row_count += 1  # Move to the next row
+
+    plt.tight_layout()  # Adjust layout to prevent overlap of plot elements
+    plt.show()  # Display the grid of box plots
+
+    
+def plot_count(data, column_list, rows, cols, fig_x=15, fig_y=15):
+    """
+    Plots count plots for each specified column in a dataset, optionally against a 'Price' column to show frequency.
+
+    This function creates a grid of count plots for each column specified in the column_list. The count plot represents
+    the count of occurrences of each unique value of the variable, which is useful for categorical data analysis. If the
+    price parameter is incorrectly mentioned to be set to True (as countplot does not compare against 'Price'), it reflects
+    a misuse of the parameter here; the function primarily focuses on showing the frequency distribution of categories.
+
+    Parameters:
+    - data (DataFrame): The dataset containing the data to plot.
+    - column_list (list of str): List of column names for which count plots will be created.
+    - rows (int): Number of rows in the subplot grid.
+    - cols (int): Number of columns in the subplot grid.
+    - price (bool, optional): This parameter is not applicable for count plots and should not affect the plot. Default is False.
+    - fig_x (int, optional): Width of the figure in inches. Default is 15.
+    - fig_y (int, optional): Height of the figure in inches. Default is 15.
+
+    Returns:
+    None
+    """
+    # Initialize the subplot grid with specified dimensions
+    fig, axs = plt.subplots(nrows=rows, ncols=cols, figsize=(fig_x, fig_y))
+    row_count, col_count = 0, 0  # Track the current row and column indices
+
+    for column_name in column_list:
+        sns.countplot(data=data, x=column_name, ax=axs[row_count, col_count])
+        axs[row_count, col_count].set_title(f'Countplot of {column_name}')
+        
+        # Rotate x-axis labels if more than 12 unique values to prevent overlap.
+        if data[column_name].nunique() > 12 or column_name == 'Regionname':
+            axs[row_count, col_count].tick_params(axis='x', rotation=90)
+        
+        col_count += 1  # Increment column index
+
+        # Move to the next row if the current row is filled
+        if col_count >= cols:
+            col_count = 0  # Reset column index for new row
+            row_count += 1  # Move to the next row
+
+    plt.tight_layout()  # Adjust layout to prevent overlap of plot elements
+    plt.show()  # Display the grid of box plots
