@@ -588,7 +588,7 @@ Balwyn North,3/41 Clifton St,3,t,1315000,S,hockingstuart,3/09/16,9.2,3104,3,2,2,
 Balwyn North,153 Doncaster Rd,3,h,1500000,PI,Jellis,3/09/16,9.2,3104,3,2,1,778,154,1950,Boroondara,-37.7939,145.0789,Southern Metropolitan,7809
 Balwyn North,19 Jacka St,4,h,3230000,S,Jellis,3/09/16,9.2,3104,4,4,3,1135,275,1960,Boroondara,-37.8014,145.0892,Southern Metropolitan,7809
 Balwyn North,32 Jaserfold St,2,h,1080000,S,Jellis,3/09/16,9.2,3104,2,1,1,253,,,Boroondara,-37.7912,145.085,Southern Metropolitan,7809
-Balwyn North,30 Abbott St,7,h,1350000,PI,Barry,3/12/16,9.2,3104,7,2,0,942,,,Boroondara,-37.7923,145.1029,Southern Metropolitan,7809
+Balwyn North,30 Abbott St,4,h,1350000,PI,Barry,3/12/16,9.2,3104,4,3,2,942,,,Boroondara,-37.7923,145.1029,Southern Metropolitan,7809
 Balwyn North,25 Bolinda Rd,4,h,1905000,S,Noel,3/12/16,9.2,3104,4,2,2,647,185,1955,Boroondara,-37.7917,145.0868,Southern Metropolitan,7809
 Balwyn North,3 Dumblane St,5,h,3300000,PI,hockingstuart,3/12/16,9.2,3104,5,4,2,760,477,2015,Boroondara,-37.7907,145.0907,Southern Metropolitan,7809
 Balwyn North,30 Hood St,4,h,1900000,VB,Fletchers,3/12/16,9.2,3104,4,2,2,642,215,1955,Boroondara,-37.7988,145.0726,Southern Metropolitan,7809
@@ -706,7 +706,7 @@ Bentleigh,127 Tucker Rd,4,h,1260000,PI,hockingstuart,4/03/17,13,3204,4,2,2,793,,
 Bentleigh,37 Godfrey St,4,h,2700000,S,hockingstuart,4/06/16,13,3204,4,3,2,628,,,Glen Eira,-37.9155,145.0401,Southern Metropolitan,6795
 Bentleigh,174 Jasper Rd,3,t,900000,PI,hockingstuart,4/06/16,13,3204,3,2,1,418,,1925,Glen Eira,-37.9172,145.0421,Southern Metropolitan,6795
 Bentleigh,15 Miles St,3,h,1100000,VB,Buxton,4/06/16,13,3204,3,2,2,0,,,Glen Eira,-37.922,145.0302,Southern Metropolitan,6795
-Bentleigh,143 Patterson Rd,7,h,1005000,S,Ray,4/06/16,13,3204,7,3,4,607,,1950,Glen Eira,-37.9269,145.047,Southern Metropolitan,6795
+Bentleigh,143 Patterson Rd,4,h,1005000,S,Ray,4/06/16,13,3204,4,3,2,607,,1950,Glen Eira,-37.9269,145.047,Southern Metropolitan,6795
 Bentleigh,13 Somers St,3,h,1317500,S,Buxton,4/06/16,13,3204,3,1,1,576,127,1945,Glen Eira,-37.9149,145.0254,Southern Metropolitan,6795
 Bentleigh,8/11 Brentwood St,2,u,360000,PI,Buxton,6/08/16,13,3204,2,1,1,0,69,1965,Glen Eira,-37.9332,145.045,Southern Metropolitan,6795
 Bentleigh,12b Coates St,4,t,1435000,S,hockingstuart,6/08/16,13,3204,3,3,2,291,212,2012,Glen Eira,-37.9278,145.0337,Southern Metropolitan,6795
@@ -3253,7 +3253,7 @@ Heidelberg Heights,82 Southern Rd,3,h,650000,S,Miles,16/04/2016,10.5,3081,3,1,2,
 Heidelberg Heights,12 Burns Ct,3,h,659500,SP,Miles,17/09/2016,10.5,3081,3,1,1,608,,,Banyule,-37.7361,145.0551,Eastern Metropolitan,2947
 Heidelberg Heights,68 Bamfield Rd,3,h,725000,S,Haughton,19/11/2016,10.5,3081,3,1,2,580,,,Banyule,-37.738,145.0563,Eastern Metropolitan,2947
 Heidelberg Heights,2/35 Porter Rd,2,u,605000,S,Harcourts,19/11/2016,10.5,3081,2,1,1,166,87,2008,Banyule,-37.7416,145.0567,Eastern Metropolitan,2947
-Heidelberg Heights,478 Waterdale Rd,8,h,770000,VB,Miles,19/11/2016,10.5,3081,8,4,4,638,115,1960,Banyule,-37.7426,145.048,Eastern Metropolitan,2947
+Heidelberg Heights,478 Waterdale Rd,2,h,770000,VB,Miles,19/11/2016,10.5,3081,2,1,4,638,115,1960,Banyule,-37.7426,145.048,Eastern Metropolitan,2947
 Heidelberg Heights,498 Waterdale Rd,3,h,950000,S,Miles,19/11/2016,10.5,3081,3,1,2,800,118,1960,Banyule,-37.7406,145.0483,Eastern Metropolitan,2947
 Heidelberg Heights,13 Altona St,4,h,856000,S,Miles,22/08/2016,10.5,3081,4,1,2,722,208,1975,Banyule,-37.7477,145.0565,Eastern Metropolitan,2947
 Heidelberg Heights,3/17 Burns Ct,3,h,600000,VB,Fletchers,22/08/2016,10.5,3081,3,2,2,251,200,2012,Banyule,-37.7358,145.0559,Eastern Metropolitan,2947
@@ -6913,7 +6913,7 @@ Fawkner,1/12 Brooks St,3,t,460000,SP,Eview,15/10/2016,12.4,3060,3,1,1,314,112,19
 Fawkner,1 Imaroo St,4,h,570500,S,Ray,15/10/2016,12.4,3060,4,2,1,430,,,Moreland,-37.7185,144.9754,Northern Metropolitan,5070
 Fawkner,2/79 Queens Pde,1,u,288000,S,Brad,15/10/2016,12.4,3060,1,1,1,69,,1960,Moreland,-37.7192,144.9654,Northern Metropolitan,5070
 Fawkner,62 Dowding Cl,4,h,615000,S,Stockdale,16/04/2016,12.4,3060,4,2,3,476,,1977,Moreland,-37.697,144.9655,Northern Metropolitan,5070
-Fawkner,39 Lynch Rd,3,h,751000,S,Stockdale,17/09/2016,12.4,3060,9,6,2,592,103,1960,Moreland,-37.712,144.9719,Northern Metropolitan,5070
+Fawkner,39 Lynch Rd,3,h,751000,S,Stockdale,17/09/2016,12.4,3060,3,1,2,592,103,1960,Moreland,-37.712,144.9719,Northern Metropolitan,5070
 Fawkner,250 McBryde St,3,h,609000,S,Ray,17/09/2016,12.4,3060,3,1,4,528,120,1965,Moreland,-37.6989,144.9779,Northern Metropolitan,5070
 Fawkner,3 Penn Ct,3,h,605000,S,Brad,17/09/2016,12.4,3060,3,1,2,531,,,Moreland,-37.7022,144.9669,Northern Metropolitan,5070
 Fawkner,37 Pitt St,3,h,691500,S,hockingstuart,17/09/2016,12.4,3060,3,1,1,646,,,Moreland,-37.7086,144.9704,Northern Metropolitan,5070
@@ -7579,7 +7579,7 @@ Brighton East,36 Clinton St,4,h,1630000,S,RT,13/05/2017,10.7,3187,4,2,1,596,,,Ba
 Brighton East,4/25 Cluden St,2,u,910000,S,Woodards,13/05/2017,10.7,3187,2,1,3,238,,,Bayside,-37.9126,145.0105,Southern Metropolitan,6938
 Brighton East,1 Curzon St,3,h,1975000,S,Kay,13/05/2017,10.7,3187,3,1,2,688,,,Bayside,-37.9212,145.013,Southern Metropolitan,6938
 Brighton East,40 Hodder St,3,h,1635000,S,Buxton,13/05/2017,10.7,3187,3,1,1,597,131,1925,Bayside,-37.9064,145.0229,Southern Metropolitan,6938
-Brighton East,22 Milliara Gr,8,h,1880000,VB,Buxton,13/05/2017,10.7,3187,8,3,3,614,,,Bayside,-37.9097,145.0161,Southern Metropolitan,6938
+Brighton East,22 Milliara Gr,5,h,1880000,VB,Buxton,13/05/2017,10.7,3187,5,3,3,614,,,Bayside,-37.9097,145.0161,Southern Metropolitan,6938
 Brighton East,5 Valdemar Ct,3,h,1743000,S,Marshall,13/05/2017,10.7,3187,3,1,2,590,,,Bayside,-37.9287,145.0273,Southern Metropolitan,6938
 Brighton East,12 Agnew St,3,h,2291000,S,Marshall,20/05/2017,10.7,3187,3,2,2,530,,1886,Bayside,-37.9119,145.011,Southern Metropolitan,6938
 Brighton East,7 Roberts Ct,3,h,1270000,VB,Ray,20/05/2017,10.7,3187,3,1,3,724,,,,-37.9291,145.0297,Southern Metropolitan,6938
@@ -10175,7 +10175,7 @@ Burnley,2a Cherrill St,3,h,1837500,S,Jellis,27/05/2017,2.4,3121,3,2,1,93,164,201
 Burnside Heights,12 Burke Rd,3,h,593000,S,Barry,27/05/2017,14.8,3023,4,2,2,480,195,2007,Melton,-37.73321,144.75752,Western Metropolitan,1686
 Burwood,250 Burwood Hwy,3,h,1732000,S,Ray,27/05/2017,10.4,3125,3,1,0,646,,,Whitehorse,-37.85049,145.11687,Southern Metropolitan,5678
 Burwood,39 Leonard St,3,h,1253500,S,Buxton,27/05/2017,10.4,3125,3,1,1,583,,,Whitehorse,-37.85475,145.12321,Southern Metropolitan,5678
-Burwood,11 McComas Gr,7,h,1642000,S,Buxton,27/05/2017,10.4,3125,7,4,2,765,146,1950,Whitehorse,-37.85103,145.11231999999995,Southern Metropolitan,5678
+Burwood,11 McComas Gr,5,h,1642000,S,Buxton,27/05/2017,10.4,3125,5,3,2,765,146,1950,Whitehorse,-37.85103,145.11231999999995,Southern Metropolitan,5678
 Burwood,2/277 Warrigal Rd,2,t,700000,S,Noel,27/05/2017,10.4,3125,2,1,1,148,,,Whitehorse,-37.84743,145.09657,Southern Metropolitan,5678
 Burwood East,2C Ray Rd,3,t,780000,PI,Ray,27/05/2017,14.7,3151,3,2,2,306,138,1999,Whitehorse,-37.85473,145.1521,Eastern Metropolitan,4048
 Cairnlea,19 Tussock Gr,4,h,720000,S,YPA,27/05/2017,14.8,3023,4,2,2,595,,,Brimbank,-37.76203,144.77764,Western Metropolitan,2674
@@ -10609,7 +10609,7 @@ Burwood East,389 Blackburn Rd,3,h,1150000,S,Ray,8/07/17,14.7,3151,3,2,2,668,140,
 Burwood East,1 Sartori St,4,h,1600000,S,Fletchers,8/07/17,14.7,3151,4,2,2,592,260,2007,Whitehorse,-37.84839,145.14299,Eastern Metropolitan,4048
 Cairnlea,2 Gumleaf Ct,3,h,636000,S,YPA,8/07/17,14.8,3023,3,2,2,585,,2000,Brimbank,-37.75777,144.77974,Western Metropolitan,2674
 Camberwell,5/26 Cornell St,2,u,755000,S,hockingstuart,8/07/17,7.7,3124,2,1,1,92,82.6,1960,Boroondara,-37.8401,145.09113,Southern Metropolitan,8920
-Camberwell,1088 Toorak Rd,8,h,2200000,PI,Ross,8/07/17,7.7,3124,8,8,4,650,,,Boroondara,-37.84812,145.07414,Southern Metropolitan,8920
+Camberwell,1088 Toorak Rd,3,h,2200000,PI,Ross,8/07/17,7.7,3124,3,1,1,650,,,Boroondara,-37.84812,145.07414,Southern Metropolitan,8920
 Carnegie,11 Beena Av,3,h,1530000,SP,Woodards,8/07/17,10.1,3163,3,1,1,684,,,Glen Eira,-37.8891,145.06337,Southern Metropolitan,7822
 Carnegie,1/17 Cosy Gum Rd,2,u,750000,S,Thomson,8/07/17,10.1,3163,2,1,2,0,85,1970,Glen Eira,-37.88368,145.0515,Southern Metropolitan,7822
 Carnegie,5/12 Judith St,1,u,286000,PI,Gary,8/07/17,10.1,3163,1,1,1,314,45,1960,Glen Eira,-37.90321,145.0555,Southern Metropolitan,7822
@@ -13224,7 +13224,7 @@ Lalor,8 Bataan Ct,4,h,766000,S,Melbourne,23/09/2017,16.3,3075,4,2,5,541,110,1980
 Lalor,65 Huskisson Av,3,h,652000,S,HAR,23/09/2017,16.3,3075,3,1,2,533,,,,-37.6605,145.01218,Northern Metropolitan,8279
 Malvern,101 Stanhope St,3,h,2500000,VB,Marshall,23/09/2017,5.9,3144,3,2,,395,149,1880,,-37.85892,145.03731000000005,Southern Metropolitan,4675
 Maribyrnong,19 Merlyn St,2,h,752500,S,Purplebricks,23/09/2017,4.3,3032,2,1,,488,113,1910,,-37.78486,144.88616000000005,Western Metropolitan,4918
-Meadow Heights,13 Haddon Ct,8,h,741000,S,Barry,23/09/2017,17.4,3048,8,3,1,1063,101,1980,,-37.65826,144.92538000000005,Northern Metropolitan,4704
+Meadow Heights,13 Haddon Ct,4,h,741000,S,Barry,23/09/2017,17.4,3048,4,1,1,1063,101,1980,,-37.65826,144.92538000000005,Northern Metropolitan,4704
 Melton,118 Barries Rd,3,h,283000,S,FN,23/09/2017,31.7,3337,3,1,0,362,19,1976,,-37.68755,144.56887,Western Victoria,3600
 Melton West,1 Lincoln Wy,4,h,430000,SP,hockingstuart,23/09/2017,31.7,3337,4,1,3,675,147,1980,,-37.67363,144.55888000000004,Northern Victoria,6065
 Melton West,24 Marlo Dr,3,h,439000,S,hockingstuart,23/09/2017,31.7,3337,3,2,2,524,115,,,-37.66869,144.55666000000005,Northern Victoria,6065
