@@ -1,6 +1,6 @@
 ![alt text](dataset-cover.jpg)
 
-# Data, Dilemmas, and Discoveries: Melbourne Real Estate's Lessons on modelling
+# Data, Dilemmas, and Discoveries: Melbourne Real Estate's Lessons on Modelling
 
 ## **Introduction**
 Have you ever wondered how real estate prices are determined?  While helping a friend search for a home, I became fascinated by this question. As a data science student, I saw an opportunity to apply my newly acquired skills.  Regression analysis, data cleaning, and exploratory data analysis (EDA) were all concepts I was actively learning.  This project allowed me to combine these skills in a real-world context.
@@ -8,6 +8,16 @@ Have you ever wondered how real estate prices are determined?  While helping a f
 By leveraging a dataset from Kaggle, I could explore how these techniques work with real estate data. This included cleaning and analyzing the data, building a regression model to understand the relationship between price and property features, and potentially incorporating time series analysis to examine market trends. Finally, I aimed to showcase the findings in a presentable format using a tool like Power BI.
 
 Ultimately, my goals were twofold: to gain a deeper understanding of how price relates to property features through regression analysis, and to explore the impact of market fluctuations over time using time series analysis. Working with real data provided a valuable opportunity to solidify my knowledge and gain practical experience applying these concepts.
+
+## **Notebooks**
+**Want to see the code behind this project?** Want to see how the analysis was performed?  The code for this project, including the data manipulation, analysis, and modeling techniques, is located in the `05_Analysis_Reporting` folder. Check out the notebooks:
+
+1. [**Cleaning Notebook**](./05_Analysis_Reporting/Notebooks/01_Data_Cleaning.ipynb)
+2. [**EDA Notebook**](./05_Analysis_Reporting/Notebooks/02_Exploratory_Data_Analysis.ipynb)
+3. [**Regression Modelling Notebook**](./05_Analysis_Reporting/Notebooks/03_Regression_Modelling.ipynb)
+4. [**Time Series Notebook**](./05_Analysis_Reporting/Notebooks/04_Time_Series.ipynb)
+
+**You'll also find the Power BI dashboard in the same folder.**
 
 ## **Executive Summary**
 
@@ -45,15 +55,15 @@ ___
 ### **Data Cleaning**
 My project began by importing the dataset for initial inspection and data cleaning. I immediately removed any duplicates and extracted month, and year into separate columns from the existing date column, for potential use as features in the regression modelling stage. A preliminary inspection using the `.describe()` and `.isna().sum()` functions revealed several issues within the data.
 
-![alt text](image.png)
+![alt text](readme_img/image.png)
 
-![alt text](image-1.png)
+![alt text](readme_img/image-1.png)
 
-![alt text](image-2.png)
+![alt text](readme_img/image-2.png)
 
-![alt text](image-3.png)
+![alt text](readme_img/image-3.png)
 
-![alt text](image-4.png)
+![alt text](readme_img/image-4.png)
 
 **1. Inconsistent Room Data:**
 * **Problem:** Two columns ('Rooms' and 'Bedroom2') contained room data with occasional discrepancies.
@@ -83,7 +93,7 @@ My project began by importing the dataset for initial inspection and data cleani
 **Updated Data:**
 After dealing with those issues this is what our data looked like:
 
-![alt text](image-5.png)
+![alt text](readme_img/image-5.png)
 
 **Note:** Prediction and imputation of 'BuildingArea' will be addressed in a subsequent step. 'YearBuilt' has been dropped.
 
@@ -94,7 +104,7 @@ While it's often preferable to retain all data points, specific circumstances wa
 **Initial Assessment:**
 Boxplots of the quantitative features revealed the expected right-skewed distribution typical of real estate data. 
 
-![alt text](image-6.png)
+![alt text](readme_img/image-6.png)
 
 **Addressing Outliers:**
 
@@ -112,16 +122,16 @@ Boxplots of the quantitative features revealed the expected right-skewed distrib
   
 **Result:**
 
-![alt text](image-7.png)
+![alt text](readme_img/image-7.png)
 
 The revised distributions for 'Price', 'Landsize', and 'BuildingArea' exhibit less skewness. The resulting data loss (approximately 7.05%) was considered a worthwhile trade-off for the potential modelling benefits.
 
 #### 'BuildingArea' Imputation
 
-**Pre-modelling Analysis**
+**Pre-Modelling Analysis**
 Before fitting a predictive model, an initial analysis was conducted to guide model selection.
 
-![alt text](image-13.png)
+![alt text](readme_img/image-13.png)
 
 Observations of non-linear relationships between 'BuildingArea' and other features suggested that a non-linear model would be optimal.
 
@@ -137,7 +147,7 @@ Careful consideration was given to model selection, as many options exist. After
 **Addressing Feature Explosion**
 To address the large number of features created by dummy variables of categorical variables, we employed Recursive Feature Elimination with Cross-Validation (RFECV). This reduced the feature count from 831 to an optimal 39, minimizing overfitting risk. 
 
-![alt text](image-9.png)
+![alt text](readme_img/image-9.png)
 
 **Hyperparameter Tuning and Evaluation**
 GridSearchCV was used to fine-tune the Random Forest model's hyperparameters, further optimizing performance using the selected features. This yielded training \(R^2\) of 0.7363 and test \(R^2\) of 0.6246. While some overfitting is evident, the difference is not extreme. Additionally, RMSE values (training: 26.9028, test: 32.4254) are reasonable for the 'BuildingArea' range. This configuration outperformed other tested models.
@@ -155,23 +165,23 @@ EDA provided insights crucial for modelling and data preparation decisions. Key 
 * Most features exhibit right-skewness, suggesting a potential benefit from normalization (transformation) for linear models. 
 * 'Landsize' and 'BuildingArea' (continuous quantitative variables) may require scaling.
 
-![alt text](image-10.png)
+![alt text](readme_img/image-10.png)
 
 **Boxplots:**
 * No extreme outliers were detected in the current data, confirming the effectiveness of previous outlier handling.
 
-![alt text](image-11.png)
+![alt text](readme_img/image-11.png)
 
 **Scatter Plots:**
 * Predominantly non-linear relationships exist between quantitative features and the target variable ('Price'). This indicates the suitability of either transformed linear models or inherently non-linear models.
 
-![alt text](image-13.png)
+![alt text](readme_img/image-13.png)
 
 **Correlation Matrix:**
 * Expected positive correlations between most quantitative features and 'Price' were observed. 
 * Interestingly, 'Distance' (to downtown) and 'Price' showed a weaker-than-expected correlation, implying a potentially complex relationship worth further investigation.
 
-![alt text](image-14.png)
+![alt text](readme_img/image-14.png)
 
 Here's a revised version of your conclusion that aims to be more concise, focused on key takeaways, and less repetitive:
 
@@ -210,7 +220,7 @@ The focus shifted to non-linear models, specifically Random Forest, for the foll
 
 **Note:**  Specific feature engineering techniques like transformation and scaling were not necessary for Random Forest due to its inherent strengths in handling these data characteristics. 
 
-#### Random Forest modelling
+#### Random Forest Modelling
 
 **Motivation:**
 After feature engineering failed to sufficiently improve the fit of linear models (due to inherent data non-linearity), I shifted my focus to a non-linear machine learning model, specifically Random Forest. Key reasons:
@@ -315,7 +325,7 @@ The dashboard empowers stakeholders (board members, potential buyers, etc.) to e
  
 **Image of Dashboard**
 
-![alt text](image-15.png)
+![alt text](readme_img/image-15.png)
 
 ## **Conclusion**
 
@@ -323,7 +333,7 @@ This project was a transformative learning experience, demonstrating the complex
 
 * **Data Preparation:** I gained a deep appreciation for the importance of careful data collection and scraping practices. This experience inspired me to learn data scraping to ensure better data quality for future projects.
 * **Exploratory Data Analysis (EDA):**  EDA underscored the necessity of understanding data characteristics before modelling. It taught me to identify non-linearities, potential multicollinearity, and the need for appropriate feature engineering techniques.
-* **modelling:** Although my dataset posed challenges for certain models, it reinforced the importance of troubleshooting and experimenting with different approaches.  This motivates me to expand my machine learning knowledge for greater flexibility and problem-solving in future projects.
+* **Modelling:** Although my dataset posed challenges for certain models, it reinforced the importance of troubleshooting and experimenting with different approaches.  This motivates me to expand my machine learning knowledge for greater flexibility and problem-solving in future projects.
 * **Time Series Analysis:**  The unsuccessful attempt at exponential smoothing due to data limitations taught me about the importance of consistent data intervals for time series analysis. 
 
 **Key Takeaways:**
@@ -336,5 +346,3 @@ I'm eager to develop my skills in:
 
 * **Data Scraping:**  To gain greater control over data quality and reduce reliance on external sources.
 * **Machine Learning:** To broaden my analytical toolkit and effectively address diverse datasets and modelling challenges.
-
-**Overall, this project was a transformative learning experience. It highlighted the practical complexities of data analysis and inspired a continued quest for knowledge and skill development in this field.**  
