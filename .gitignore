@@ -160,4 +160,24 @@ cython_debug/
 #.idea/
 
 # Custom ignored files
-testing.py
+**/skewness_test.py
+**/missing_eda.py
+Keeping track.docx
+**/3.5_GAM.py
+**/0_melb_data.xlsx
+**/0_melb_data.zip
+**/melb_data.csv
+**/1_notes.ipynb
+**/2_notes.ipynb
+**/05_Dashboard.ipynb
+**/TOC.ipynb
+
+# Custom ignored folders
+**/Tracking Updates/
+**/0_hidden/
+**/1_hidden/
+**/2_hidden/
+**/3_hidden/
+**/4_hidden/
+**/items/
+documentation/
