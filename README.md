@@ -1,4 +1,4 @@
-![alt text](readme_img\dataset-cover.jpg)
+![alt text](utils/img\dataset-cover.jpg)
 
 # Data, Dilemmas, and Discoveries: Melbourne Real Estate's Lessons on Modelling
 
@@ -55,15 +55,15 @@ ___
 ### **Data Cleaning**
 My project began by importing the dataset for initial inspection and data cleaning. I immediately removed any duplicates and extracted month, and year into separate columns from the existing date column, for potential use as features in the regression modelling stage. A preliminary inspection using the `.describe()` and `.isna().sum()` functions revealed several issues within the data.
 
-![alt text](readme_img/image.png)
+![alt text](utils/img/image.png)
 
-![alt text](readme_img/image-1.png)
+![alt text](utils/img/image-1.png)
 
-![alt text](readme_img/image-2.png)
+![alt text](utils/img/image-2.png)
 
-![alt text](readme_img/image-3.png)
+![alt text](utils/img/image-3.png)
 
-![alt text](readme_img/image-4.png)
+![alt text](utils/img/image-4.png)
 
 **1. Inconsistent Room Data:**
 * **Problem:** Two columns ('Rooms' and 'Bedroom2') contained room data with occasional discrepancies.
@@ -93,7 +93,7 @@ My project began by importing the dataset for initial inspection and data cleani
 **Updated Data:**
 After dealing with those issues this is what our data looked like:
 
-![alt text](readme_img/image-5.png)
+![alt text](utils/img/image-5.png)
 
 **Note:** Prediction and imputation of 'BuildingArea' will be addressed in a subsequent step. 'YearBuilt' has been dropped.
 
@@ -104,7 +104,7 @@ While it's often preferable to retain all data points, specific circumstances wa
 **Initial Assessment:**
 Boxplots of the quantitative features revealed the expected right-skewed distribution typical of real estate data. 
 
-![alt text](readme_img/image-6.png)
+![alt text](utils/img/image-6.png)
 
 **Addressing Outliers:**
 
@@ -122,7 +122,7 @@ Boxplots of the quantitative features revealed the expected right-skewed distrib
   
 **Result:**
 
-![alt text](readme_img/image-7.png)
+![alt text](utils/img/image-7.png)
 
 The revised distributions for 'Price', 'Landsize', and 'BuildingArea' exhibit less skewness. The resulting data loss (approximately 7.05%) was considered a worthwhile trade-off for the potential modelling benefits.
 
@@ -131,7 +131,7 @@ The revised distributions for 'Price', 'Landsize', and 'BuildingArea' exhibit le
 **Pre-Modelling Analysis**
 Before fitting a predictive model, an initial analysis was conducted to guide model selection.
 
-![alt text](readme_img/image-13.png)
+![alt text](utils/img/image-13.png)
 
 Observations of non-linear relationships between 'BuildingArea' and other features suggested that a non-linear model would be optimal.
 
@@ -147,7 +147,7 @@ Careful consideration was given to model selection, as many options exist. After
 **Addressing Feature Explosion**
 To address the large number of features created by dummy variables of categorical variables, we employed Recursive Feature Elimination with Cross-Validation (RFECV). This reduced the feature count from 831 to an optimal 39, minimizing overfitting risk. 
 
-![alt text](readme_img/image-9.png)
+![alt text](utils/img/image-9.png)
 
 **Hyperparameter Tuning and Evaluation**
 GridSearchCV was used to fine-tune the Random Forest model's hyperparameters, further optimizing performance using the selected features. This yielded training \(R^2\) of 0.7363 and test \(R^2\) of 0.6246. While some overfitting is evident, the difference is not extreme. Additionally, RMSE values (training: 26.9028, test: 32.4254) are reasonable for the 'BuildingArea' range. This configuration outperformed other tested models.
@@ -165,23 +165,23 @@ EDA provided insights crucial for modelling and data preparation decisions. Key 
 * Most features exhibit right-skewness, suggesting a potential benefit from normalization (transformation) for linear models. 
 * 'Landsize' and 'BuildingArea' (continuous quantitative variables) may require scaling.
 
-![alt text](readme_img/image-10.png)
+![alt text](utils/img/image-10.png)
 
 **Boxplots:**
 * No extreme outliers were detected in the current data, confirming the effectiveness of previous outlier handling.
 
-![alt text](readme_img/image-11.png)
+![alt text](utils/img/image-11.png)
 
 **Scatter Plots:**
 * Predominantly non-linear relationships exist between quantitative features and the target variable ('Price'). This indicates the suitability of either transformed linear models or inherently non-linear models.
 
-![alt text](readme_img/image-13.png)
+![alt text](utils/img/image-13.png)
 
 **Correlation Matrix:**
 * Expected positive correlations between most quantitative features and 'Price' were observed. 
 * Interestingly, 'Distance' (to downtown) and 'Price' showed a weaker-than-expected correlation, implying a potentially complex relationship worth further investigation.
 
-![alt text](readme_img/image-14.png)
+![alt text](utils/img/image-14.png)
 
 Here's a revised version of your conclusion that aims to be more concise, focused on key takeaways, and less repetitive:
 
@@ -256,7 +256,7 @@ The availability of sale dates and prices enabled a time series analysis to inve
 
 **Moving Average Plot**
 
-![alt text](<readme_img\ma graph.png>)
+![alt text](<utils/img\ma graph.png>)
 
 #### **Moving Average Analysis (Key Observations and Insights)**
 
@@ -325,7 +325,7 @@ The dashboard empowers stakeholders (board members, potential buyers, etc.) to e
  
 **Image of Dashboard**
 
-![alt text](readme_img/image-15.png)
+![alt text](utils/img/image-15.png)
 
 ## **Conclusion**
 
