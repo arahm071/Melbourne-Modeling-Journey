@@ -1,4 +1,4 @@
-![alt text](dataset-cover.jpg)
+![alt text](readme_img\dataset-cover.jpg)
 
 # Data, Dilemmas, and Discoveries: Melbourne Real Estate's Lessons on Modelling
 
@@ -256,7 +256,7 @@ The availability of sale dates and prices enabled a time series analysis to inve
 
 **Moving Average Plot**
 
-![alt text](<ma graph.png>)
+![alt text](<readme_img\ma graph.png>)
 
 #### **Moving Average Analysis (Key Observations and Insights)**
 
@@ -342,7 +342,10 @@ This project broadened my understanding of the Melbourne real estate market (201
 
 **Future Directions**
 
-I'm eager to develop my skills in:
+To build upon this project and improve future analyses, I'm eager to develop my skills in:
 
-* **Data Scraping:**  To gain greater control over data quality and reduce reliance on external sources.
-* **Machine Learning:** To broaden my analytical toolkit and effectively address diverse datasets and modelling challenges.
+* **Data Scraping:**  To gain greater control over data quality, focusing on techniques to streamline collection and minimize pre-processing needs for this type of real estate data.
+
+* **Machine Learning:** To broaden my toolkit with models specifically suited for non-linearity and potentially inconsistent time intervals, allowing for more in-depth analysis of real estate pricing trends.
+
+**Overall, this project was a transformative learning experience. It highlighted the practical complexities of data analysis and inspired a continued quest for knowledge and skill development in this field.**
