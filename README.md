@@ -1,4 +1,4 @@
-![alt text](utils/img\dataset-cover.jpg)
+![alt text](utils/img/dataset-cover.jpg)
 
 # Data, Dilemmas, and Discoveries: Melbourne Real Estate's Lessons on Modelling
 
