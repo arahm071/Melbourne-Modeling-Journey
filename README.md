@@ -256,7 +256,7 @@ The availability of sale dates and prices enabled a time series analysis to inve
 
 **Moving Average Plot**
 
-![alt text](<utils/img\ma graph.png>)
+![alt text](<utils/img/ma graph.png>)
 
 #### **Moving Average Analysis (Key Observations and Insights)**
 
