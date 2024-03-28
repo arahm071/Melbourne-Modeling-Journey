@@ -140,7 +140,7 @@ Before fitting a predictive model, an initial analysis was conducted to guide mo
 
 ![alt text](utils/img/image-13.png)
 
-Observations of non-linear relationships between 'BuildingArea' and other features suggested that a non-linear model would be optimal.
+Observations of non-linear relationships between 'BuildingArea' and other features, along with the substantial number of missing values (6166), suggested that a non-linear model capable of handling missing data would be optimal.
 
 **Model Selection and Feature Engineering**
 
@@ -160,7 +160,7 @@ To address the large number of features created by dummy variables of categorica
 GridSearchCV was used to fine-tune the Random Forest model's hyperparameters, further optimizing performance using the selected features. This yielded training \(R^2\) of 0.7363 and test \(R^2\) of 0.6246. While some overfitting is evident, the difference is not extreme. Additionally, RMSE values (training: 26.9028, test: 32.4254) are reasonable for the 'BuildingArea' range. This configuration outperformed other tested models.
 
 **Imputation and Completion**
-The optimized model was used to predict missing 'BuildingArea' values, successfully imputing them and creating a fully cleaned dataset. This dataset was exported as a CSV for subsequent analysis.
+The optimized model was used to predict missing 'BuildingArea' values, successfully imputing 6166 entries and creating a fully cleaned dataset. This dataset was exported as a CSV for subsequent analysis.
 
 ### **Exploratory Data Analysis (EDA)**
 
@@ -338,14 +338,24 @@ The dashboard empowers stakeholders (board members, potential buyers, etc.) to e
 
 This project was a transformative learning experience, demonstrating the complexities of applying theoretical concepts to real-world data.  It highlighted challenges and valuable lessons in various aspects of the data analysis process:
 
-* **Data Preparation and Wrangling:** I gained a deep appreciation for the importance of careful data collection and scraping practices, as well as thorough data wrangling to ensure data quality. This experience inspired me to learn data scraping to improve my ability to work with real-world datasets in future projects.
+* **Data Preparation and Wrangling:** I gained a deep appreciation for the importance of careful data collection and scraping practices, as well as thorough data wrangling to ensure data quality. This included employing a predictive model to impute a significant number of missing values. This experience inspired me to learn data scraping to improve my ability to work with real-world datasets in future projects.
 * **Exploratory Data Analysis (EDA):**  EDA underscored the necessity of understanding data characteristics before modelling. It taught me to identify non-linearities, potential multicollinearity, and the need for appropriate feature engineering techniques.
 * **Modelling:** Although my dataset posed challenges for certain models, it reinforced the importance of troubleshooting and experimenting with different approaches.  This motivates me to expand my machine learning knowledge for greater flexibility and problem-solving in future projects.
 * **Time Series Analysis:**  The unsuccessful attempt at exponential smoothing due to data limitations taught me about the importance of consistent data intervals for time series analysis. 
 
-**Key Takeaways:**
+**Key Takeaways**
 
-This project broadened my understanding of the Melbourne real estate market (2016-2017). Importantly, it emphasized the crucial role of well-prepared data and the expanded analytical possibilities that come with a strong foundation in machine learning.
+* **The Primacy of Data Quality:** This project underscored the importance of meticulous data inspection, verification, and cleaning throughout the analysis process. Each step, from imputation to modeling, requires careful justification and validation to ensure meaningful results.
+
+* **Harnessing Predictive Power:**  Employing predictive models for missing value imputation demonstrated their value in enhancing data completeness, opening up new possibilities for insightful analysis.
+
+* **Understanding Non-linearity:**  Extensive EDA highlighted how visualizations and statistical techniques reveal non-linear relationships, guiding the choice of appropriate feature engineering and modeling strategies.
+
+* **Navigating Model Selection and Optimization:** I gained hands-on experience selecting both linear and non-linear models, fine-tuning them with feature engineering, hyperparameter tuning (grid search with cross-validation), and feature selection (RFECV). This emphasized the importance of tailoring models and techniques to the specific characteristics of the data.
+
+* **The Potential and Limitations of Time Series:**  While data inconsistencies limited traditional time series modeling, the project reinforced the importance of data quality for these techniques. It also provided valuable experience associating market trends with external factors for deeper insights.
+
+* **Visualizing for Impact:** Creating a visual dashboard showcased the power of interactive data presentation. It allows stakeholders to easily explore insights and patterns, facilitating informed decision-making.
 
 **Future Directions**
 
