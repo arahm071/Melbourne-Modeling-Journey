@@ -65,6 +65,13 @@ My project began by importing the dataset for initial inspection and data cleani
 
 ![alt text](utils/img/image-4.png)
 
+**Data Wrangling**
+
+Initial data inspection revealed inconsistencies, numerous missing values, and outliers that significantly impacted data quality. To prepare the data for analysis, I employed various data wrangling techniques, including:
+* Addressing  inconsistencies in room features to ensure accurate representation.
+*  Handling missing values in 'Bathroom', 'Car', 'BuildingArea', and 'CouncilArea' using a combination of median imputation, data matching, and a  predictive model.
+* Identifying and addressing outliers in 'Price', 'Landsize', and 'BuildingArea' using the IQR method for improved distribution and model performance. 
+
 **1. Inconsistent Room Data:**
 * **Problem:** Two columns ('Rooms' and 'Bedroom2') contained room data with occasional discrepancies.
 * **Solution:**  I created a function, `effective_bedrooms`, to compare both columns and select the lower value, ensuring a conservative estimate. This resulted in a new 'Bedroom' column, and 'Rooms' and 'Bedroom2' were dropped.
@@ -331,7 +338,7 @@ The dashboard empowers stakeholders (board members, potential buyers, etc.) to e
 
 This project was a transformative learning experience, demonstrating the complexities of applying theoretical concepts to real-world data.  It highlighted challenges and valuable lessons in various aspects of the data analysis process:
 
-* **Data Preparation:** I gained a deep appreciation for the importance of careful data collection and scraping practices. This experience inspired me to learn data scraping to ensure better data quality for future projects.
+* **Data Preparation and Wrangling:** I gained a deep appreciation for the importance of careful data collection and scraping practices, as well as thorough data wrangling to ensure data quality. This experience inspired me to learn data scraping to improve my ability to work with real-world datasets in future projects.
 * **Exploratory Data Analysis (EDA):**  EDA underscored the necessity of understanding data characteristics before modelling. It taught me to identify non-linearities, potential multicollinearity, and the need for appropriate feature engineering techniques.
 * **Modelling:** Although my dataset posed challenges for certain models, it reinforced the importance of troubleshooting and experimenting with different approaches.  This motivates me to expand my machine learning knowledge for greater flexibility and problem-solving in future projects.
 * **Time Series Analysis:**  The unsuccessful attempt at exponential smoothing due to data limitations taught me about the importance of consistent data intervals for time series analysis. 
