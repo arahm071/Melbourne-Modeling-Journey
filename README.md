@@ -22,7 +22,7 @@ Ultimately, my goals were twofold: to gain a deeper understanding of how price r
 ## **Executive Summary**
 
 ### **Data Gathering**
-I used the Melbourne Housing Snapshot dataset (https://www.kaggle.com/datasets/dansbecker/melbourne-housing-snapshot), which records the Melbourne Housing Market from early 2016 to the end of 2017. The .csv format allowed for seamless analysis within my notebook using the pandas library.
+I used the Melbourne Housing Snapshot dataset ([link to the dataset](https://www.kaggle.com/datasets/dansbecker/melbourne-housing-snapshot)), which records the Melbourne Housing Market from early 2016 to the end of 2017. The .csv format allowed for seamless analysis within my notebook using the pandas library.
 
 The dataset includes the following columns:
 
